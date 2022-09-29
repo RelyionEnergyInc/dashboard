@@ -4,10 +4,10 @@ module.exports = app => {
   var router = require("express").Router();
 
 
-  // Retrieve all Tutorials
+  // Retrieve all Data Samples
   router.get("/", datasamples.findAll);
 
-  // Retrieve a single Tutorial with id
+  // Retrieve a single Data Sample with id
   router.get("/:id", datasamples.findOne);
 
   app.use('/api/datasamples', router);
