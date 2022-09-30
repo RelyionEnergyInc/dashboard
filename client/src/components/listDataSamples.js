@@ -8,7 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DataSampleService from "../services/datasample.service";
-import { Container } from "@mui/system";
+import { Container, width } from "@mui/system";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -91,40 +91,43 @@ export default class ListDataSamples extends Component {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "flex-start",
-                height: "100vh"
+                height: "100vh",
+                width: "90vw"
 
             }}>
-                <h1 style={{alignSelf: 'flex-start', paddingLeft: '5%'}}>Data Samples List</h1>
+                <h1 style={{ alignSelf: 'flex-start' }}>Data Samples List</h1>
+                                        <div style={{padding: '1%'}}>
+
             {currentDataSample ? (
-                    <Table >
-                        <TableHead>
-                            <TableRow>
-                                <TableCell><strong>Data Sample: {currentDataSample.id}</strong></TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                        <TableRow>
-                            <label>
-                                <strong>Date:</strong>
-                            </label>{" "}
-                            {currentDataSample.Time}
-                        </TableRow>
-                        <TableRow>
-                            <label>
-                                <strong>Frequency:</strong>
-                            </label>{" "}
-                            {currentDataSample.freq}
-                            </TableRow>
-                        </TableBody>
-                    </Table>
+                    <div>
+                            <h4>Data Sample</h4>
+                            <div>
+                                <label>
+                                    <strong>Date:</strong>
+                                </label>{" "}
+                                {currentDataSample.time}
+                            </div>
+                            <div>
+                                <label>
+                                    <strong>Frequency:</strong>
+                                </label>{" "}
+                                {currentDataSample.freq}
+                            </div>
+                            {/* <Link
+                                to={"/datasamples/" + currentDataSample.id}
+                                className="badge badge-warning"
+                            >
+                                Edit
+                            </Link> */}
+                        </div>
                     ) : (
                         <div>
                             <br />
                             <p>Please click on a Data Sample...</p>
                         </div>
                     )}
-
-            <TableContainer component={Paper} sx={{maxHeight: "400px"}} >
+            
+            <TableContainer component={Paper} sx={{maxHeight: "70vh"}} >
                     <Table stickyHeader sx={{ 
                         width: "100%",
                         backgroundColor: "lightblue",
@@ -134,12 +137,18 @@ export default class ListDataSamples extends Component {
                     }} >
                         <TableHead sx={{position: 'sticky'}}>
                             <TableRow>
+                                <StyledTableCell>ID</StyledTableCell>
                                 <StyledTableCell>Time</StyledTableCell>
                                 <StyledTableCell>Freq</StyledTableCell>
                                 <StyledTableCell>Vab</StyledTableCell>
                                 <StyledTableCell>Vbc</StyledTableCell>
                                 <StyledTableCell>Vca</StyledTableCell>
                                 <StyledTableCell>Van</StyledTableCell>
+                                <StyledTableCell>Vbn</StyledTableCell>
+                                <StyledTableCell>Vcn</StyledTableCell>
+                                <StyledTableCell>pf</StyledTableCell>
+
+
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -153,12 +162,18 @@ export default class ListDataSamples extends Component {
                                     onClick={() => this.setActiveDataSample(dataSample, index)}
                                     key={index}
                                 >
+                                    <StyledTableCell>{dataSample.id}</StyledTableCell>
                                     <StyledTableCell>{dataSample.Time}</StyledTableCell>
                                     <StyledTableCell>{dataSample.freq}</StyledTableCell>
                                     <StyledTableCell>{dataSample.Vab}</StyledTableCell>
                                     <StyledTableCell>{dataSample.Vbc}</StyledTableCell>
                                     <StyledTableCell>{dataSample.Vca}</StyledTableCell>
                                     <StyledTableCell>{dataSample.Van}</StyledTableCell>
+                                    <StyledTableCell>{dataSample.Vbn}</StyledTableCell>
+                                    <StyledTableCell>{dataSample.Vcn}</StyledTableCell>
+                                    <StyledTableCell>{dataSample.pf}</StyledTableCell>
+
+
                                 </StyledTableRow>
                             ))}
                         </TableBody>
@@ -167,6 +182,7 @@ export default class ListDataSamples extends Component {
 
                     
                 </TableContainer>
+                </div>
                 </div>
         );
     }
