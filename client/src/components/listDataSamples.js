@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DataSampleService from "../services/datasample.service";
+import { Container } from "@mui/system";
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -29,7 +30,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
-  },
+    },
+    '&:hover': {
+        backgroundColor: '#f5f5f5',
+    },
 }));
 
 export default class ListDataSamples extends Component {
@@ -69,21 +73,66 @@ export default class ListDataSamples extends Component {
         });
     }
 
+    setActiveDataSample(dataSample, index) {
+        this.setState({
+            currentDataSample: dataSample,
+            currentIndex: index
+        });
+
+    }
+
 
     render() {
         const { dataSamples, currentDataSample, currentIndex } = this.state;
 
         return (
-            <TableContainer component={Paper}>
-                    <h4>Data Samples List</h4>
+            <div style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "flex-start",
+                height: "100vh"
 
-                    <Table sx={{ 
+            }}>
+                <h1 style={{alignSelf: 'flex-start', paddingLeft: '5%'}}>Data Samples List</h1>
+            {currentDataSample ? (
+                    <Table >
+                        <TableHead>
+                            <TableRow>
+                                <TableCell><strong>Data Sample: {currentDataSample.id}</strong></TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                        <TableRow>
+                            <label>
+                                <strong>Date:</strong>
+                            </label>{" "}
+                            {currentDataSample.Time}
+                        </TableRow>
+                        <TableRow>
+                            <label>
+                                <strong>Frequency:</strong>
+                            </label>{" "}
+                            {currentDataSample.freq}
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                    ) : (
+                        <div>
+                            <br />
+                            <p>Please click on a Data Sample...</p>
+                        </div>
+                    )}
+
+            <TableContainer component={Paper} sx={{maxHeight: "400px"}} >
+                    <Table stickyHeader sx={{ 
                         width: "100%",
                         backgroundColor: "lightblue",
                         // border: "1px solid black",
                         borderCollapse: "collapse",
+                        
                     }} >
-                        <TableHead>
+                        <TableHead sx={{position: 'sticky'}}>
                             <TableRow>
                                 <StyledTableCell>Time</StyledTableCell>
                                 <StyledTableCell>Freq</StyledTableCell>
@@ -93,7 +142,7 @@ export default class ListDataSamples extends Component {
                                 <StyledTableCell>Van</StyledTableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody >
+                        <TableBody>
                         {dataSamples &&
                             dataSamples.map((dataSample, index) => (
                                 <StyledTableRow
@@ -116,35 +165,9 @@ export default class ListDataSamples extends Component {
                     </Table>
 
 
-                    {currentDataSample ? (
-                        <div>
-                            <h4>Data Sample</h4>
-                            <div>
-                                <label>
-                                    <strong>Date:</strong>
-                                </label>{" "}
-                                {currentDataSample.time}
-                            </div>
-                            <div>
-                                <label>
-                                    <strong>Frequency:</strong>
-                                </label>{" "}
-                                {currentDataSample.freq}
-                            </div>
-                            {/* <Link
-                                to={"/datasamples/" + currentDataSample.id}
-                                className="badge badge-warning"
-                            >
-                                Edit
-                            </Link> */}
-                        </div>
-                    ) : (
-                        <div>
-                            <br />
-                            <p>Please click on a Data Sample...</p>
-                        </div>
-                    )}
-            </TableContainer>
+                    
+                </TableContainer>
+                </div>
         );
     }
 }
