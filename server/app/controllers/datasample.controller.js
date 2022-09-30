@@ -1,5 +1,5 @@
 const db = require("../models");
-const DataSample = db.tutorials;
+const DataSample = db.invertertestdata;
 const Op = db.Sequelize.Op;
 
 
