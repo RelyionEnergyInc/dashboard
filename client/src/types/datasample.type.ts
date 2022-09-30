@@ -1,4 +1,5 @@
 export default interface DataSample {
+    id: number;
     time: Date;
     freq: number;
     Vab: number;

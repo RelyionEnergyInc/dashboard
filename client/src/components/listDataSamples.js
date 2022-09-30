@@ -47,10 +47,27 @@ export default class ListDataSamples extends Component {
                 <div className="col-md-6">
                     <h4>Data Samples List</h4>
 
-                    <ul className="list-group">
+                    <table style={{ 
+                        margin: "10px",
+                        width: "100%",
+                        border: "1px solid black",
+                        borderCollapse: "collapse",
+                        
+                    }} >
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Freq</th>
+                                <th>Vab</th>
+                                <th>Vbc</th>
+                                <th>Vca</th>
+                                <th>Van</th>
+                            </tr>
+                        </thead>
+                        <tbody >
                         {dataSamples &&
                             dataSamples.map((dataSample, index) => (
-                                <li
+                                <tr 
                                     className={
                                         "list-group-item " +
                                         (index === currentIndex ? "active" : "")
@@ -58,10 +75,16 @@ export default class ListDataSamples extends Component {
                                     onClick={() => this.setActiveDataSample(dataSample, index)}
                                     key={index}
                                 >
-                                    {dataSample.time}
-                                </li>
+                                    <td style={{justifyContent: "center",
+                        alignItems: "center"}}>{dataSample.Time}</td>
+                                    <td>{dataSample.freq}</td>
+                                    <td>{dataSample.Vab}</td>
+                                    <td>{dataSample.Vbc}</td>
+                                    <td>{dataSample.Vca}</td>
+                                </tr>
                             ))}
-                    </ul>
+                        </tbody>
+                    </table>
 
                 </div>
                 <div className="col-md-6">
