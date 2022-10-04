@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import ListDataSamples from './components/listDataSamples';
+import WidgetModels from './components/widgetModels';
 
 
 function App() {
@@ -14,7 +15,19 @@ function App() {
       width: "100vw"
 
     }}>
-      <ListDataSamples />
+      <div className='tile'>
+        <a href="#listDemoContainer"><h2>Show List</h2></a>
+      </div>
+      <div className='tile-content' id="listDemoContainer">
+        <ListDataSamples />
+      </div>
+      <div className='tile'>
+        <a href="#widgetDemoContainer"><h2>Show Static Widgets</h2></a>
+      </div>
+      <div className='tile-content' id="widgetDemoContainer">
+        <WidgetModels />
+      </div>
+
     </div>
   );
 }

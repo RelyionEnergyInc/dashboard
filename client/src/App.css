@@ -32,7 +32,33 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.tile {
+  width: 60vw;
+  height: 10vh;
+  background-color: #afdafb;
+  cursor: pointer;
+  border-radius: 25px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 5%;
+  margin: 5%;
+
+}
+
+.tile-content {
+  overflow: hidden;
+  transition: all 0.5s ease;
+  max-height: 0vh;
+}
+
+.tile-content:target {
+  max-height: 150vh;
 }
