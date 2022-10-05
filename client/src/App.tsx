@@ -22,6 +22,12 @@ function App() {
         <ListDataSamples />
       </div>
       <div className='tile'>
+        <a href="#gaugeDemoContainer"><h2>Show Dynamic Gauges</h2></a>
+      </div>
+      <div className='tile-content' id="gaugeDemoContainer">
+        <WidgetModels />
+      </div>
+      <div className='tile'>
         <a href="#widgetDemoContainer"><h2>Show Static Widgets</h2></a>
       </div>
       <div className='tile-content' id="widgetDemoContainer">
