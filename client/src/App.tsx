@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
 import ListDataSamples from './components/listDataSamples';
-import WidgetModels from './components/widgetModels';
+import GaugeModels from './components/gaugeModels';
+import LineChart from './components/chartModels';
+
 
 
 function App() {
@@ -25,13 +27,13 @@ function App() {
         <a href="#gaugeDemoContainer"><h2>Show Dynamic Gauges</h2></a>
       </div>
       <div className='tile-content' id="gaugeDemoContainer">
-        <WidgetModels />
+        <GaugeModels />
       </div>
       <div className='tile'>
-        <a href="#widgetDemoContainer"><h2>Show Static Widgets</h2></a>
+        <a href="#widgetDemoContainer"><h2>Show Dynamic Charts</h2></a>
       </div>
       <div className='tile-content' id="widgetDemoContainer">
-        <WidgetModels />
+        {/* <LineChart /> */}
       </div>
 
     </div>

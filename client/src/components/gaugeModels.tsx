@@ -31,7 +31,7 @@ const gaugeStyle = {
 
 
 
-export default function WidgetModels() {
+export default function GaugeModels() {
   const values = [50, 73, 21, 35, 45, 93, 62, 75, 32, 9, 100];
   const [counter, setCounter] = useState(0);
 
