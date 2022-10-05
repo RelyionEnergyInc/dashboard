@@ -13,8 +13,10 @@ export function Meter(props: MeterProps) {
   return (
     <GaugeChart
       id="gauge-chart1"
-      nrOfLevels={50}
+      nrOfLevels={200}
       percent={props.value / props.max}
+      animate={true}
+      animateDuration={2000}
       textColor="#000"
       colors={['#5BE12C', '#F5CD19', '#EA4228']}
       arcsLength={[0.3, 0.5, 0.2]}
@@ -22,22 +24,22 @@ export function Meter(props: MeterProps) {
   )
 }
 
+const gaugeStyle = {
+  maxWidth: "20vw",
+  height: 250,
+}
+
 
 
 export default function WidgetModels() {
   const values = [50, 73, 21, 35, 45, 93, 62, 75, 32, 9, 100];
-  const [currValueIndex, setCurrValueIndex] = useState(0);
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
-    // currValueIndexRef.current = currValueIndex;
-    const interval = setInterval(() => {
-      console.log(currValueIndex);
-      setCurrValueIndex(currValueIndex + 1);
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
+    setTimeout(() => setCounter(counter + 1), 1000);
+  }, [counter]);
 
-  console.log(currValueIndex);
+  console.log(values[counter % values.length]);
   return (
     <div style={{
       display: "flex",
@@ -46,14 +48,14 @@ export default function WidgetModels() {
       justifyContent: "flex-start",
 
     }}>
-      <div style={{ maxWidth: '20vw' }}>
-        <Meter value={values[currValueIndex]} max={100} />
+      <div style={gaugeStyle}>
+        <Meter value={values[counter % values.length]} max={100} />
       </div>
-      <div style={{ maxWidth: '20vw' }}>
-        <Meter value={75} max={100} />
+      <div style={gaugeStyle}>
+        <Meter value={Math.floor(Math.random() * (100 - values[counter % values.length]) + values[counter % values.length])} max={100} />
       </div>
-      <div style={{ maxWidth: '20vw' }}>
-        <Meter value={75} max={100} />
+      <div style={gaugeStyle}>
+        <Meter value={Math.floor(Math.random() * 99 + 1)} max={100} />
       </div>
     </div>
   );
