@@ -5,9 +5,9 @@ class DataSampleService {
         return http.get("/datasamples");
     }
 
-    // get(id: string) {
-    //     return http.get(`/datasamples/${id}`);
-    // }
+    getOne(id: string) {
+        return http.get(`/datasamples/${id}`);
+    }
 
     // create(data: DataSample) {
     //     return http.post("/datasamples", data);

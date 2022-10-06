@@ -7,6 +7,11 @@ module.exports = app => {
   // Retrieve all Data Samples
   router.get("/", datasamples.findAll);
 
+  router.get("/:id", datasamples.findOne);
+
+  // app.get('*', datasamples);
+
+
   // Retrieve a single Data Sample with id
   // router.get("/:id", datasamples.findOne);
 
