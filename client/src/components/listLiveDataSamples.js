@@ -37,7 +37,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-export default class ListDataSamples extends Component {
+export default class ListLiveDataSamples extends Component {
     
     constructor(props) {
         super(props);
@@ -46,7 +46,8 @@ export default class ListDataSamples extends Component {
         this.state = {
             dataSamples: [],
             currentDataSample: null,
-            currentIndex: -1,
+            currentIndex
+                : -1,
         };
     }
 
@@ -55,9 +56,16 @@ export default class ListDataSamples extends Component {
     }
 
     retrieveDataSamples() {
-        DataSampleService.getOne(5)
+
+
+
+        //Control which datasample id is being retrieved
+
+        //HERE
+        DataSampleService.get(5)
             
-            .then(response => {
+            
+                .then(response => {
                 this.setState({
                     dataSamples: response.data
                 });
@@ -159,29 +167,21 @@ export default class ListDataSamples extends Component {
                         </TableHead>
                         <TableBody>
                         {dataSamples &&
-                            dataSamples.map((dataSample, index) => (
-                                <StyledTableRow
-                                    className={
-                                        "list-group-item " +
-                                        (index === currentIndex ? "active" : "")
-                                    }
-                                    onClick={() => this.setActiveDataSample(dataSample, index)}
-                                    key={index}
-                                >
-                                    <StyledTableCell>{dataSample.Time}</StyledTableCell>
-                                    <StyledTableCell>{dataSample.id}</StyledTableCell>
-                                    <StyledTableCell>{dataSample.freq}</StyledTableCell>
-                                    <StyledTableCell>{dataSample.Vab}</StyledTableCell>
-                                    <StyledTableCell>{dataSample.Vbc}</StyledTableCell>
-                                    <StyledTableCell>{dataSample.Vca}</StyledTableCell>
-                                    <StyledTableCell>{dataSample.Van}</StyledTableCell>
-                                    <StyledTableCell>{dataSample.Vbn}</StyledTableCell>
-                                    <StyledTableCell>{dataSample.Vcn}</StyledTableCell>
-                                    <StyledTableCell>{dataSample.pf}</StyledTableCell>
+                                <StyledTableRow>
+                                    <StyledTableCell>{dataSamples.Time}</StyledTableCell>
+                                    <StyledTableCell>{dataSamples.id}</StyledTableCell>
+                                    <StyledTableCell>{dataSamples.freq}</StyledTableCell>
+                                    <StyledTableCell>{dataSamples.Vab}</StyledTableCell>
+                                    <StyledTableCell>{dataSamples.Vbc}</StyledTableCell>
+                                    <StyledTableCell>{dataSamples.Vca}</StyledTableCell>
+                                    <StyledTableCell>{dataSamples.Van}</StyledTableCell>
+                                    <StyledTableCell>{dataSamples.Vbn}</StyledTableCell>
+                                    <StyledTableCell>{dataSamples.Vcn}</StyledTableCell>
+                                    <StyledTableCell>{dataSamples.pf}</StyledTableCell>
 
 
                                 </StyledTableRow>
-                            ))}
+                            }
                         </TableBody>
                     </Table>
 

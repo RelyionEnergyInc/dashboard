@@ -5,7 +5,7 @@ class DataSampleService {
         return http.get("/datasamples");
     }
 
-    getOne(id: string) {
+    get(id: string) {
         return http.get(`/datasamples/${id}`);
     }
 
