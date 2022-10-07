@@ -46,7 +46,7 @@ function App() {
         <a href="#gaugeDemoContainer"><h2>Show Dynamic Gauges</h2></a>
       </div>
       <div className='tile-content' id="gaugeDemoContainer">
-        <GaugeModels />
+        <GaugeModels val1={50} val2={50} val3={50} />
       </div>
       <div className='tile'>
         <a href="#widgetDemoContainer"><h2>Show Dynamic Charts</h2></a>
