@@ -39,7 +39,7 @@ export default function GaugeModels() {
     setTimeout(() => setCounter(counter + 1), 1000);
   }, [counter]);
 
-  console.log(values[counter % values.length]);
+  // console.log(values[counter % values.length]);
   return (
     <div style={{
       display: "flex",

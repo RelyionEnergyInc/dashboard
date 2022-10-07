@@ -47,24 +47,17 @@ export default class ListLiveDataSamples extends Component {
             dataSamples: [],
             currentDataSample: null,
             currentIndex
-                : -1,
+                : 1,
         };
     }
 
-    componentDidMount() {
-        this.retrieveDataSamples();
-    }
-
-    retrieveDataSamples() {
-
-
-
-        //Control which datasample id is being retrieved
-
-        //HERE
-        DataSampleService.get(5)
-            
-            
+    simulateTimePassing() {
+        setInterval(() => {
+            this.setState({
+                currentIndex: this.state.currentIndex + 1
+            });
+        
+        DataSampleService.get(this.state.currentIndex)
                 .then(response => {
                 this.setState({
                     dataSamples: response.data
@@ -74,6 +67,21 @@ export default class ListLiveDataSamples extends Component {
             .catch(e => {
                 console.log(e);
             });
+            }, 1000);
+    }
+    
+
+    componentDidMount() {
+        this.retrieveDataSamples();
+    }
+    componentWillUnmount() {
+    // Clear the interval right before component unmount
+         clearInterval(this.interval);
+    }
+
+    retrieveDataSamples() {
+        this.simulateTimePassing();
+
     }
 
     refreshDataSampleList() {
@@ -110,6 +118,7 @@ export default class ListLiveDataSamples extends Component {
                 width: "90vw"
 
             }}>
+                <h2>{this.state.currentIndex}</h2>
                                         <div style={{padding: '1%'}}>
 
             {currentDataSample ? (
