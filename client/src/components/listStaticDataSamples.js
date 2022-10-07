@@ -91,9 +91,6 @@ export default class ListDataSamples extends Component {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "flex-start",
-                height: "100vh",
-                width: "90%",
-                marginLeft: "5%",
                 overflow: "auto"
 
             }}>

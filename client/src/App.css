@@ -49,7 +49,7 @@
   justify-content: flex-start;
   align-items: center;
   padding-left: 5%;
-  margin: 5%;
+  margin: 1%;
 
 }
 
@@ -57,7 +57,7 @@
   overflow: auto;
   transition: all 0.5s ease;
   max-height: 0vh;
-  margin: 5%;
+  /* margin: 5%; */
 }
 
 .tile-content:target {
