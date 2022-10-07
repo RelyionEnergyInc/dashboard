@@ -11,9 +11,5 @@ module.exports = app => {
 
   // app.get('*', datasamples);
 
-
-  // Retrieve a single Data Sample with id
-  // router.get("/:id", datasamples.findOne);
-
   app.use('/api/datasamples', router);
 };
