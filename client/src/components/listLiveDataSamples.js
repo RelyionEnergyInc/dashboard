@@ -57,6 +57,7 @@ export default class ListLiveDataSamples extends Component {
                 currentIndex: this.state.currentIndex + 1
             });
         
+        //Retrieve data samples from the server given the current index
         DataSampleService.get(this.state.currentIndex)
                 .then(response => {
                 this.setState({
@@ -67,7 +68,9 @@ export default class ListLiveDataSamples extends Component {
             .catch(e => {
                 console.log(e);
             });
-            }, 1000);
+        }, 1000);
+
+        //Implement better handling of missing / not ready data samples
     }
     
 
@@ -81,7 +84,6 @@ export default class ListLiveDataSamples extends Component {
 
     retrieveDataSamples() {
         this.simulateTimePassing();
-
     }
 
     refreshDataSampleList() {
@@ -114,42 +116,8 @@ export default class ListLiveDataSamples extends Component {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "flex-start",
-                height: "100vh",
-                width: "90vw"
-
             }}>
-                <h2>{this.state.currentIndex}</h2>
-                                        <div style={{padding: '1%'}}>
-
-            {currentDataSample ? (
-                    <div>
-                            <h4>Data Sample</h4>
-                            <div>
-                                <label>
-                                    <strong>Date:</strong>
-                                </label>{" "}
-                                {currentDataSample.time}
-                            </div>
-                            <div>
-                                <label>
-                                    <strong>Frequency:</strong>
-                                </label>{" "}
-                                {currentDataSample.freq}
-                            </div>
-                            {/* <Link
-                                to={"/datasamples/" + currentDataSample.id}
-                                className="badge badge-warning"
-                            >
-                                Edit
-                            </Link> */}
-                        </div>
-                    ) : (
-                        <div>
-                            <br />
-                            <p>Please click on a Data Sample...</p>
-                        </div>
-                    )}
-            
+        <div style={{padding: '1%'}}>   
             <TableContainer component={Paper} sx={{maxHeight: "70vh"}} >
                     <Table stickyHeader sx={{ 
                         width: "100%",
@@ -196,7 +164,17 @@ export default class ListLiveDataSamples extends Component {
 
 
                     
-                </TableContainer>
+                    </TableContainer>
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                    >
+                      Getting Data Sample: <h4>{this.state.currentIndex}</h4>
+                    </div>
                 </div>
                 </div>
         );

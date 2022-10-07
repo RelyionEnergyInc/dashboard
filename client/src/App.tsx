@@ -18,18 +18,30 @@ function App() {
       width: "100vw"
 
     }}>
+      <div style={{
+        display: "flex",
+        flexDirection: "row",
+        width: "100vw",
+        // padding: '5vw',
+        justifyContent: "center",
+      }}>
+        <ListLiveDataSamples />
+
+
+      </div>
+
       <div className='tile'>
         <a href="#listDemoStaticContainer"><h2>Show Static Data List</h2></a>
       </div>
       <div className='tile-content' id="listDemoStaticContainer">
         <ListDataSamples />
       </div>
-      <div className='tile'>
+      {/* <div className='tile'>
         <a href="#listDemoLiveContainer"><h2>Show Live Data List</h2></a>
-      </div>
-      <div className='tile-content' id="listDemoLiveContainer">
+      </div> */}
+      {/* <div className='tile-content' id="listDemoLiveContainer">
         <ListLiveDataSamples />
-      </div>
+      </div> */}
       <div className='tile'>
         <a href="#gaugeDemoContainer"><h2>Show Dynamic Gauges</h2></a>
       </div>
