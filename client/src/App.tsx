@@ -6,8 +6,15 @@ import GaugeModels from './components/gaugeModels';
 import LineChart from './components/chartModels';
 
 
+import useStore from './store';
+
+
+
 
 function App() {
+  const idx = useStore.getState().idx;
+
+
   return (
     <div style={{
       display: "flex",
@@ -29,6 +36,7 @@ function App() {
 
 
       </div>
+      <h2>{idx}</h2>
 
       <div className='tile'>
         <a href="#listDemoStaticContainer"><h2>Show Static Data List</h2></a>
