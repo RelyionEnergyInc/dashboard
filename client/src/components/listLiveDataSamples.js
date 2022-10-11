@@ -10,6 +10,9 @@ import Paper from '@mui/material/Paper';
 import DataSampleService from "../services/datasample.service";
 // import { Container, width } from "@mui/system";
 
+import useStore from '../store';
+
+import { currentSample, setCurrentSample, idx, setIdx, value, setValue } from '../store';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -38,7 +41,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default class ListLiveDataSamples extends Component {
-    
+    // const setIdx = useStore((state) => state.setIdx);
     constructor(props) {
         super(props);
         this.retrieveDataSamples = this.retrieveDataSamples.bind(this);
@@ -68,6 +71,7 @@ export default class ListLiveDataSamples extends Component {
             .catch(e => {
                 console.log(e);
             });
+            // useStore.setIdx(1);
         }, 1000);
 
         //Implement better handling of missing / not ready data samples
