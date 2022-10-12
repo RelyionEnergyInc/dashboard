@@ -8,11 +8,17 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DataSampleService from "../services/datasample.service";
+
+
+import { setIdx, setValue } from '../sampleStateSlice';
+
+import { connect } from 'react-redux';
+
 // import { Container, width } from "@mui/system";
 
-import useStore from '../store';
+// import useStore from '../store';
 
-import { currentSample, setCurrentSample, idx, setIdx, value, setValue } from '../store';
+// import { currentSample, setCurrentSample, idx, setIdx, value, setValue } from '../store';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -40,8 +46,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-export default class ListLiveDataSamples extends Component {
-    // const setIdx = useStore((state) => state.setIdx);
+class ListLiveDataSamples extends Component {
     constructor(props) {
         super(props);
         this.retrieveDataSamples = this.retrieveDataSamples.bind(this);
@@ -59,7 +64,8 @@ export default class ListLiveDataSamples extends Component {
             this.setState({
                 currentIndex: this.state.currentIndex + 1
             });
-        
+            this.props.setValue(this.state.currentIndex);
+
         //Retrieve data samples from the server given the current index
         DataSampleService.get(this.state.currentIndex)
                 .then(response => {
@@ -103,7 +109,7 @@ export default class ListLiveDataSamples extends Component {
             currentDataSample: dataSample,
             currentIndex: index
         });
-
+        this.props.setSample(dataSample);
     }
 
     
@@ -184,3 +190,5 @@ export default class ListLiveDataSamples extends Component {
         );
     }
 }
+
+export default connect(null, { setIdx, setValue })(ListLiveDataSamples);
