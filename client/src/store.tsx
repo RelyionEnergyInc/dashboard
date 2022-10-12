@@ -7,6 +7,7 @@ interface DemoState {
     setCurrentSample: (sample: DataSample) => void;
     idx: number;
     setIdx: (idx: number) => void;
+    increaseIdx: () => void;
     value: number;
     setValue: (value: number) => void;
 }
@@ -72,13 +73,14 @@ const useStore = create<DemoState>((set) => ({
     },
     setCurrentSample: (sample: DataSample) => set(() => ({ currentSample: sample })),
 
-    idx: 4,
+    idx: 5,
     setIdx: (idx) =>
         set((state) => ({
             ...state,
             idx
         })),
     value: 0,
+    increaseIdx: () => set((state => ({ idx: state.idx + 1 }))),
     setValue: (value) =>
         set((state) => ({
             ...state,

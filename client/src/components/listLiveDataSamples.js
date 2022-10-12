@@ -12,7 +12,9 @@ import DataSampleService from "../services/datasample.service";
 
 import useStore from '../store';
 
-import { currentSample, setCurrentSample, idx, setIdx, value, setValue } from '../store';
+import { currentSample, idx, increaseIdx, value, setValue } from '../store';
+
+import {setIdx, setCurrentSample} from '../setStateVals.js';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -39,6 +41,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
         backgroundColor: '#f5f5f5',
     },
 }));
+
+const store = useStore.subscribe((state) => state.idx);
 
 export default class ListLiveDataSamples extends Component {
     // const setIdx = useStore((state) => state.setIdx);
@@ -71,7 +75,8 @@ export default class ListLiveDataSamples extends Component {
             .catch(e => {
                 console.log(e);
             });
-            // useStore.setIdx(1);
+            setIdx(this.state.currentIndex);
+            setCurrentSample(this.state.dataSamples);
         }, 1000);
 
         //Implement better handling of missing / not ready data samples
