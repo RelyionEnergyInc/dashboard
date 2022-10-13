@@ -53,8 +53,7 @@ export default class ListLiveDataSamples extends Component {
         this.state = {
             dataSamples: [],
             currentDataSample: null,
-            currentIndex
-                : 1,
+            currentIndex: 1,
         };
     }
 
@@ -75,7 +74,7 @@ export default class ListLiveDataSamples extends Component {
             .catch(e => {
                 console.log(e);
             });
-            setIdx(this.state.currentIndex);
+            // setIdx(this.state.currentIndex);
             setCurrentSample(this.state.dataSamples);
         }, 1000);
 

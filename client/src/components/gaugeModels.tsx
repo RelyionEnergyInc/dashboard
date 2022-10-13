@@ -1,80 +1,37 @@
-import { useState, useRef, useEffect } from 'react';
-import GaugeChart from 'react-gauge-chart';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Doughnut } from "react-chartjs-2";
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 
-interface MeterProps {
-  value: number;
-  max: number;
-}
+export const data = {
+  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+  datasets: [
+    {
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
 
-
-
-
-export function Meter(props: MeterProps) {
+export default function GaugeModels() {
   return (
-    <GaugeChart
-      id="gauge-chart1"
-      nrOfLevels={200}
-      percent={props.value / props.max}
-      animate={true}
-      animateDuration={2000}
-      textColor="#000"
-      colors={['#5BE12C', '#F5CD19', '#EA4228']}
-      arcsLength={[0.3, 0.5, 0.2]}
-    />
-  )
-}
-
-const gaugeStyle = {
-  maxWidth: "20vw",
-  height: 250,
-}
-
-interface GaugeProps {
-  val1?: number;
-  val2?: number;
-  val3?: number;
-  unit1?: string;
-  unit2?: string;
-  unit3?: string;
-}
-
-//NOTE
-//Input values must be converted to a percentage before being passed to a Gauge component
-
-export default function GaugeModels(props: GaugeProps) {
-  const values = [50, 73, 21, 35, 45, 93, 62, 75, 32, 9, 100];
-  const [counter, setCounter] = useState(0);
-
-  useEffect(() => {
-    setTimeout(() => setCounter(counter + 1), 1000);
-  }, [counter]);
-
-  // console.log(values[counter % values.length]);
-  return (
-    <div style={{
-      display: "flex",
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "flex-start",
-
-    }}>
-      {props.val1 &&
-        <div style={gaugeStyle}>
-          <Meter value={props.val1} max={100} />
-        </div>
-      }
-      {props.val2 &&
-        <div style={gaugeStyle}>
-          <Meter value={props.val2} max={100} />
-        </div>
-      }
-      {props.val3 &&
-        <div style={gaugeStyle}>
-          <Meter value={props.val3} max={100} />
-        </div>
-      }
-    </div>
+    <Doughnut data={data} />
   );
 }
-

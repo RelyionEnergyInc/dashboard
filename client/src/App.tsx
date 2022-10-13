@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import ListDataSamples from './components/listStaticDataSamples';
 import ListLiveDataSamples from './components/listLiveDataSamples';
-// import GaugeModels from './components/gaugeModels';
+import GaugeModels from './components/gaugeModels';
 import LineChart from './components/chartModels';
 
 
@@ -12,7 +12,8 @@ import useStore from './store';
 
 
 function App() {
-  const idx = useStore(state => state.idx);
+  const idx = useStore(state => state.currentSample.freq);
+  // const idx = currentSample.id;
 
 
   return (
@@ -54,7 +55,7 @@ function App() {
         <a href="#gaugeDemoContainer"><h2>Show Dynamic Gauges</h2></a>
       </div>
       <div className='tile-content' id="gaugeDemoContainer">
-        {/* <GaugeModels val1={50} val2={50} val3={50} /> */}
+        <GaugeModels />
       </div>
       <div className='tile'>
         <a href="#widgetDemoContainer"><h2>Show Dynamic Charts</h2></a>
