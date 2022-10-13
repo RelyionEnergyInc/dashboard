@@ -15,6 +15,9 @@ import useStore from './store';
 function App() {
   const idx = useStore(state => state.currentSample.id);
   const freq = useStore(state => state.currentSample.freq);
+  const vab = useStore(state => state.currentSample.Vab);
+  const pf = useStore(state => state.currentSample.pf);
+
 
   // const idx = currentSample.id;
 
@@ -55,7 +58,7 @@ function App() {
         <div style={{
           maxWidth: "80vw",
         }}>
-          <GaugeModels />
+          <GaugeModels values={[freq % 100, vab % 100, pf % 100]} labels={['Frequency', 'Vab', 'PF']} />
         </div>
       </div>
       <div className='tile'>

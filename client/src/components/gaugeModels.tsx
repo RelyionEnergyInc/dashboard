@@ -2,9 +2,14 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+interface GaugeModelProps {
+  values: number[];
+  labels: string[];
+}
 
-export const data = {
-  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+
+export const dataaaa = {
+
   datasets: [
     {
       label: '# of Votes',
@@ -34,7 +39,22 @@ const options = {
   responsive: true,
 }
 
-export default function GaugeModels() {
+export default function GaugeModels({ values, labels }: GaugeModelProps) {
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: 'Dataset 1',
+        data: values,
+        backgroundColor: ['rgba(255, 99, 132, 0.5)',
+          'rgba(54, 162, 235, 0.5)',
+          'rgba(255, 206, 86, 0.5)',
+        ],
+      },
+    ],
+  };
+
+
   return (
     <Doughnut data={data} options={options} width={300} height={300} />
   );
