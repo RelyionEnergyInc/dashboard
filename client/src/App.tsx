@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import ListDataSamples from './components/listStaticDataSamples';
 import ListLiveDataSamples from './components/listLiveDataSamples';
-import FListLiveDataSamples from './components/functionalListLiveDataSamples';
 import GaugeModels from './components/gaugeModels';
 import { LineChart, BarChart } from './components/chartModels';
 
@@ -39,7 +38,6 @@ function App() {
       }}>
 
         <ListLiveDataSamples />
-        {/* <FListLiveDataSamples /> */}
 
       </div>
       <h2>{idx}</h2>
@@ -48,30 +46,28 @@ function App() {
         <a href="#listDemoStaticContainer"><h2>Show Static Data List</h2></a>
       </div>
       <div className='tile-content' id="listDemoStaticContainer">
-        {/* <ListDataSamples /> */}
+        <ListDataSamples />
       </div>
-      {/* <div className='tile'>
-        <a href="#listDemoLiveContainer"><h2>Show Live Data List</h2></a>
-      </div> */}
       <div className='tile'>
         <a href="#gaugeDemoContainer"><h2>Show Dynamic Gauges</h2></a>
       </div>
       <div className='tile-content' id="gaugeDemoContainer">
-        <GaugeModels />
-      </div>
-      <div className='tile'>
-        <a href="#widgetDemoContainer"><h2>Show Dynamic Charts</h2></a>
-      </div>
-      <div className='tile-content' id="widgetDemoContainer">
-        {/* <LineChart /> */}
-
         <div style={{
           maxWidth: "80vw",
         }}>
-          <BarChart valueA={freq * 0.001} valueB={idx} valueC={50} />
+          <GaugeModels />
         </div>
       </div>
-
+      <div className='tile'>
+        <a href="#barDemoContainer"><h2>Show Dynamic Bars</h2></a>
+      </div>
+      <div className='tile-content' id="barDemoContainer">
+        <div style={{
+          maxWidth: "80vw",
+        }}>
+          <BarChart valueA={freq * 0.001} valueB={idx % 100} valueC={50} />
+        </div>
+      </div>
     </div>
   );
 }

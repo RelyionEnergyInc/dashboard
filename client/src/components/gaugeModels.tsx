@@ -30,8 +30,12 @@ export const data = {
   ],
 };
 
+const options = {
+  responsive: true,
+}
+
 export default function GaugeModels() {
   return (
-    <Doughnut data={data} />
+    <Doughnut data={data} options={options} width={300} height={300} />
   );
 }
