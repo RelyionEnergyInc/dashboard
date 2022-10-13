@@ -57,11 +57,13 @@ export default class ListLiveDataSamples extends Component {
         };
     }
 
-    simulateTimePassing() {
+
+    componentDidMount() {
         setInterval(() => {
             this.setState({
                 currentIndex: this.state.currentIndex + 1
             });
+            console.log("incrementing index: " + this.state.currentIndex);
         
         //Retrieve data samples from the server given the current index
         DataSampleService.get(this.state.currentIndex)
@@ -77,17 +79,47 @@ export default class ListLiveDataSamples extends Component {
             // setIdx(this.state.currentIndex);
             setCurrentSample(this.state.dataSamples);
         }, 1000);
+    }
 
+    simulateTimePassing() {
+        setInterval(() => {
+            const state = this.state;
+            this.setState({
+                currentIndex: state.currentIndex + 1
+            });
+            console.log("incrementing index: " + this.state.currentIndex);
+        
+        //Retrieve data samples from the server given the current index
+        DataSampleService.get(this.state.currentIndex)
+                .then(response => {
+                this.setState({
+                    dataSamples: response.data
+                });
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+            // setIdx(this.state.currentIndex);
+            setCurrentSample(this.state.dataSamples);
+        }, 1000);
+        clearInterval(this.state.interval);
         //Implement better handling of missing / not ready data samples
     }
+
+
+
+    
     
 
-    componentDidMount() {
-        this.retrieveDataSamples();
-    }
+    // componentDidMount() {
+    //     this.retrieveDataSamples();
+    //     console.log("mounting: " + this.state.currentIndex);
+    // }
     componentWillUnmount() {
     // Clear the interval right before component unmount
-         clearInterval(this.interval);
+        clearInterval(this.state.interval);
+        console.log("unmounting: " + this.state.currentIndex);
     }
 
     retrieveDataSamples() {

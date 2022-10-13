@@ -2,8 +2,9 @@ import React from 'react';
 import './App.css';
 import ListDataSamples from './components/listStaticDataSamples';
 import ListLiveDataSamples from './components/listLiveDataSamples';
+import FListLiveDataSamples from './components/functionalListLiveDataSamples';
 import GaugeModels from './components/gaugeModels';
-import LineChart from './components/chartModels';
+import { LineChart, BarChart } from './components/chartModels';
 
 
 import useStore from './store';
@@ -11,8 +12,11 @@ import useStore from './store';
 
 
 
+
 function App() {
-  const idx = useStore(state => state.currentSample.freq);
+  const idx = useStore(state => state.currentSample.id);
+  const freq = useStore(state => state.currentSample.freq);
+
   // const idx = currentSample.id;
 
 
@@ -33,8 +37,9 @@ function App() {
         // padding: '5vw',
         justifyContent: "center",
       }}>
-        <ListLiveDataSamples />
 
+        <ListLiveDataSamples />
+        {/* <FListLiveDataSamples /> */}
 
       </div>
       <h2>{idx}</h2>
@@ -43,13 +48,10 @@ function App() {
         <a href="#listDemoStaticContainer"><h2>Show Static Data List</h2></a>
       </div>
       <div className='tile-content' id="listDemoStaticContainer">
-        <ListDataSamples />
+        {/* <ListDataSamples /> */}
       </div>
       {/* <div className='tile'>
         <a href="#listDemoLiveContainer"><h2>Show Live Data List</h2></a>
-      </div> */}
-      {/* <div className='tile-content' id="listDemoLiveContainer">
-        <ListLiveDataSamples />
       </div> */}
       <div className='tile'>
         <a href="#gaugeDemoContainer"><h2>Show Dynamic Gauges</h2></a>
@@ -62,6 +64,12 @@ function App() {
       </div>
       <div className='tile-content' id="widgetDemoContainer">
         {/* <LineChart /> */}
+
+        <div style={{
+          maxWidth: "80vw",
+        }}>
+          <BarChart valueA={freq * 0.001} valueB={idx} valueC={50} />
+        </div>
       </div>
 
     </div>

@@ -5,7 +5,7 @@ class DataSampleService {
         return http.get("/datasamples");
     }
 
-    get(id: string) {
+    get(id: number) {
         return http.get(`/datasamples/${id}`);
     }
 
