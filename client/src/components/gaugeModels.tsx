@@ -8,8 +8,7 @@ interface GaugeModelProps {
 }
 
 
-export const dataaaa = {
-
+export const data = {
   datasets: [
     {
       label: '# of Votes',

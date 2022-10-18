@@ -6,8 +6,12 @@ import {
   Title,
   Tooltip,
   Legend,
+  PointElement,
+  LineElement,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
+
+import { useEffect, useState } from 'react';
 
 
 ChartJS.register(
@@ -16,12 +20,60 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  PointElement,
+  LineElement
 );
 
-export function LineChart() {
+interface LineChartProps {
+  valueA: number[];
+  timeA: number[];
+}
+
+export function LineChart({ valueA, timeA }: LineChartProps) {
+
+
+  const options = {
+    responsive: true,
+    scales: {
+      y: {
+        min: 59900,
+        max: 60100,
+        stepSize: 5,
+      },
+      x:
+      {
+
+      },
+    },
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart',
+      },
+    },
+    // maintainAspectRatio: false,
+  };
+
+  const values = [...valueA]
+  const labels = [...timeA];
+
+
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: 'Frequency',
+        data: values,
+        backgroundColor: ['rgba(255, 99, 132, 0.5)'],
+      },
+    ],
+  };
   return (
-    <></>
+    <Line data={data} options={options} width={300} height={300} />
   )
 }
 

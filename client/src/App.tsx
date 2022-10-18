@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import ListDataSamples from './components/listStaticDataSamples';
 import ListLiveDataSamples from './components/listLiveDataSamples';
@@ -19,8 +19,17 @@ function App() {
   const pf = useStore(state => state.currentSample.pf);
 
 
-  // const idx = currentSample.id;
 
+  // State array for the line chart x-axis time labels
+  const [labels, setLabels] = React.useState<number[]>([]);
+  // State array for the line chart y-axis values
+  const [values, setValues] = React.useState<number[]>([]);
+
+  useEffect(() => {
+    //Add the current time to the labels array and current freq to the values array
+    setLabels([...labels, new Date().getSeconds()]);
+    setValues([...values, freq]);
+  }, [idx, freq]);
 
   return (
     <div style={{
@@ -29,7 +38,8 @@ function App() {
       alignItems: "center",
       justifyContent: "flex-start",
       // height: "100vh",
-      width: "100vw"
+      width: "100vw",
+      paddingBottom: '20vh'
 
     }}>
       <div style={{
@@ -68,7 +78,18 @@ function App() {
         <div style={{
           maxWidth: "80vw",
         }}>
-          <BarChart valueA={freq * 0.001} valueB={idx % 100} valueC={50} />
+          <BarChart valueA={freq % 100} valueB={vab % 100} valueC={pf % 100} />
+        </div>
+      </div>
+
+      <div className='tile'>
+        <a href="#lineDemoContainer"><h2>Show Dynamic Lines</h2></a>
+      </div>
+      <div className='tile-content' id="lineDemoContainer">
+        <div style={{
+          maxWidth: "80vw",
+        }}>
+          <LineChart valueA={values} timeA={labels} />
         </div>
       </div>
     </div>
