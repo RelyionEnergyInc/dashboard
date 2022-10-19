@@ -100,10 +100,16 @@ function App() {
       <div className='tile-content' id="lineDemoContainer">
         <div style={{
           maxWidth: "80vw",
+          display: "flex",
+          flexDirection: "row",
         }}>
-          <LineChart valueA={values} timeA={labels} minY={59950} maxY={60050} label={'Frequency'} />
+          <div>
+            <LineChart valueA={values} timeA={labels} minY={59950} maxY={60050} label={'Frequency'} />
+          </div>
           {/* create a second line chart with values % by 100 */}
-          <LineChart valueA={values.map((value) => value % 50)} timeA={labels} minY={0} maxY={100} label={"Frequency % 50"} />
+          <div>
+            <LineChart valueA={values.map((value) => value % 50)} timeA={labels} minY={0} maxY={100} label={"Frequency % 50"} />
+          </div>
         </div>
       </div>
     </div>
