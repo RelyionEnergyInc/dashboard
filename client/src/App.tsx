@@ -27,8 +27,20 @@ function App() {
 
   useEffect(() => {
     //Add the current time to the labels array and current freq to the values array
-    setLabels([...labels, new Date().getSeconds()]);
-    setValues([...values, freq]);
+    if (labels.length < 10) {
+      setLabels([...labels, new Date().getSeconds()]);
+      setValues([...values, freq]);
+    } else {
+      // alert('Array is full');
+      //Remove the first element of the labels array and the first element of the values array
+      const newLabels = labels.slice(1);
+      const newValues = values.slice(1);
+      setLabels([]);
+      setValues([]);
+      setLabels([...newLabels, new Date().getSeconds()]);
+      setValues([...newValues, freq]);
+      //Add the current time to the labels array and current freq to the values array
+    }
   }, [idx, freq]);
 
   return (

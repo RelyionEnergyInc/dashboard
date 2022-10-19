@@ -37,8 +37,8 @@ export function LineChart({ valueA, timeA }: LineChartProps) {
     responsive: true,
     scales: {
       y: {
-        min: 59900,
-        max: 60100,
+        min: 59950,
+        max: 60050,
         stepSize: 5,
       },
       x:
@@ -73,7 +73,7 @@ export function LineChart({ valueA, timeA }: LineChartProps) {
     ],
   };
   return (
-    <Line data={data} options={options} width={300} height={300} />
+    <Line data={data} options={options} height={300} />
   )
 }
 
