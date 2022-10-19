@@ -28,17 +28,20 @@ ChartJS.register(
 interface LineChartProps {
   valueA: number[];
   timeA: number[];
+  minY: number;
+  maxY: number;
+  label: string;
 }
 
-export function LineChart({ valueA, timeA }: LineChartProps) {
+export function LineChart({ valueA, timeA, minY, maxY, label }: LineChartProps) {
 
 
   const options = {
     responsive: true,
     scales: {
       y: {
-        min: 59950,
-        max: 60050,
+        min: minY,
+        max: maxY,
         stepSize: 5,
       },
       x:
@@ -66,7 +69,7 @@ export function LineChart({ valueA, timeA }: LineChartProps) {
     labels,
     datasets: [
       {
-        label: 'Frequency',
+        label: label,
         data: values,
         backgroundColor: ['rgba(255, 99, 132, 0.5)'],
       },

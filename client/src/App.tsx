@@ -101,7 +101,9 @@ function App() {
         <div style={{
           maxWidth: "80vw",
         }}>
-          <LineChart valueA={values} timeA={labels} />
+          <LineChart valueA={values} timeA={labels} minY={59950} maxY={60050} label={'Frequency'} />
+          {/* create a second line chart with values % by 100 */}
+          <LineChart valueA={values.map((value) => value % 50)} timeA={labels} minY={0} maxY={100} label={"Frequency % 50"} />
         </div>
       </div>
     </div>
