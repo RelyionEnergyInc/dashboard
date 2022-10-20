@@ -41,7 +41,7 @@
 
 .tile {
   width: 60vw;
-  height: 10vh;
+  height: 3vh;
   background-color: #afdafb;
   cursor: pointer;
   border-radius: 25px;
@@ -62,6 +62,7 @@
   display: grid;
   align-items: center;
   justify-content: center;
+  overflow-y: hidden;
 }
 
 .data-list {
