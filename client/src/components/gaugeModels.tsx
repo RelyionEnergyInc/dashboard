@@ -97,7 +97,10 @@ export function GaugeModels(props: GaugeProps) {
           value={props.val1}
           minValue={0}
           maxValue={100}
-          segments={10}
+          segments={800}
+          maxSegmentLabels={5}
+          startColor="lightgreen"
+          endColor="red"
         />
       </div>
     </>
