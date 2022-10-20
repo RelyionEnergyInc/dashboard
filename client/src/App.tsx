@@ -5,7 +5,7 @@ import ListLiveDataSamples from './components/listLiveDataSamples';
 import { GaugeModels, DoughnutModels } from './components/gaugeModels';
 import { LineChart, BarChart } from './components/chartModels';
 import useStore from './store';
-import GaugeChart from "react-gauge-chart";
+import TestGauge from './components/test.js';
 
 
 function App() {
@@ -76,12 +76,19 @@ function App() {
       </div>
       <div className='tile-content' id="gaugeDemoContainer">
         <div style={{
-          maxWidth: "80vw", display: "flex",
-          flexDirection: "row",
+          width: "80vw", display: "flex",
+          flexDirection: "row", justifyContent: "space-evenly"
         }}>
+          <div >
+            <GaugeModels val1={freq % 100} />
+          </div>
           <div>
+            <GaugeModels val1={pf % 100} />
+          </div>
+          {/* <div> */}
+          {/* <GaugeModels val1={50} val2={50} val3={50} /> */}
 
-            {/* <GaugeChart id="gauge-chart"
+          {/* <GaugeChart id="gauge-chart"
               textColor="#333"
               nrOfLevels={3}
               arcsLength={[0.8, 0.15, 0.05]}
@@ -90,10 +97,7 @@ function App() {
               arcPadding={0.02}
 
             /> */}
-          </div>
-          <div>
-            {/* <DoughnutModels values={[freq % 13, vab % 13, pf % 13]} labels={['Frequency', 'Vab', 'PF']} /> */}
-          </div>
+          {/* </div> */}
         </div>
       </div>
       <div className='tile'>
@@ -101,8 +105,8 @@ function App() {
       </div>
       <div className='tile-content' id="doughnutDemoContainer">
         <div style={{
-          maxWidth: "80vw", display: "flex",
-          flexDirection: "row",
+          width: "80vw", display: "flex",
+          flexDirection: "row", justifyContent: "space-evenly"
         }}>
           <div>
             <DoughnutModels values={[freq % 100, vab % 100, pf % 100]} labels={['Frequency', 'Vab', 'PF']} />
@@ -128,9 +132,8 @@ function App() {
       </div>
       <div className='tile-content' id="lineDemoContainer">
         <div style={{
-          maxWidth: "80vw",
-          display: "flex",
-          flexDirection: "row",
+          width: "80vw", display: "flex",
+          flexDirection: "row", justifyContent: "space-evenly"
         }}>
           <div>
             <LineChart valueA={values} timeA={labels} minY={59950} maxY={60050} label={'Frequency'} />

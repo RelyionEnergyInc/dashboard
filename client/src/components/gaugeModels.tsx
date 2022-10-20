@@ -1,6 +1,8 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from "react-chartjs-2";
-import GaugeChart from "react-gauge-chart";
+import ReactSpeedometer from "react-d3-speedometer";
+
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 interface DoughnutModelProps {
@@ -13,6 +15,24 @@ interface GaugeModelProps {
   label: string;
   levelCount: number;
   arcLengths: number[];
+}
+
+interface GaugeProps {
+  val1?: number;
+  unit1?: string;
+}
+
+interface MeterProps {
+  value: number;
+  max: number;
+}
+
+
+
+
+const gaugeStyle = {
+  maxWidth: "20vw",
+  height: 250,
 }
 
 
@@ -68,17 +88,18 @@ export function DoughnutModels({ values, labels }: DoughnutModelProps) {
 
 // export function GaugeModels({ value, levelCount, label, arcLengths }: GaugeModelProps) {
 
-export function GaugeModels() {
+export function GaugeModels(props: GaugeProps) {
   return (
-    <GaugeChart
-      id="gauge-chart"
-      textColor="#333"
-      nrOfLevels={3}
-      arcsLength={[0.8, 0.15, 0.05]}
-      colors={["#5BE12C", "#F5CD19", "#EA4228"]}
-      percent={0.4273035096951447}
-      arcPadding={0.02}
-    // text
-    />
+
+    <>
+      <div style={gaugeStyle}>
+        <ReactSpeedometer
+          value={props.val1}
+          minValue={0}
+          maxValue={100}
+          segments={10}
+        />
+      </div>
+    </>
   );
 }
