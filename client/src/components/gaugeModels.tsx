@@ -1,10 +1,18 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from "react-chartjs-2";
+import GaugeChart from "react-gauge-chart";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-interface GaugeModelProps {
+interface DoughnutModelProps {
   values: number[];
   labels: string[];
+}
+
+interface GaugeModelProps {
+  value: number;
+  label: string;
+  levelCount: number;
+  arcLengths: number[];
 }
 
 
@@ -38,7 +46,7 @@ const options = {
   responsive: true,
 }
 
-export default function GaugeModels({ values, labels }: GaugeModelProps) {
+export function DoughnutModels({ values, labels }: DoughnutModelProps) {
   const data = {
     labels,
     datasets: [
@@ -52,9 +60,25 @@ export default function GaugeModels({ values, labels }: GaugeModelProps) {
       },
     ],
   };
-
-
   return (
     <Doughnut data={data} options={options} width={300} height={300} />
+  );
+}
+
+
+// export function GaugeModels({ value, levelCount, label, arcLengths }: GaugeModelProps) {
+
+export function GaugeModels() {
+  return (
+    <GaugeChart
+      id="gauge-chart"
+      textColor="#333"
+      nrOfLevels={3}
+      arcsLength={[0.8, 0.15, 0.05]}
+      colors={["#5BE12C", "#F5CD19", "#EA4228"]}
+      percent={0.4273035096951447}
+      arcPadding={0.02}
+    // text
+    />
   );
 }

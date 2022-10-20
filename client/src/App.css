@@ -56,7 +56,7 @@
 .tile-content {
   overflow: auto;
   transition: all 0.5s ease;
-  max-height: 0vh;
+  max-height: 150vh;
   width: 100vw;
   /* margin: 5%; */
   display: grid;
@@ -64,6 +64,15 @@
   justify-content: center;
 }
 
-.tile-content:target {
+.data-list {
+  overflow: auto;
+  transition: all 0.5s ease;
+  max-height: 0vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.data-list:target {
   max-height: 150vh;
 }
