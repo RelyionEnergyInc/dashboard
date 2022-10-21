@@ -65,12 +65,12 @@ function App() {
       </div>
       <h2>{idx}</h2>
 
-      <div className='tile'>
+      {/* <div className='tile'>
         <a href="#listDemoStaticContainer"><h2>Show Static Data List</h2></a>
       </div>
       <div className='data-list' id="listDemoStaticContainer">
         <ListDataSamples />
-      </div>
+      </div> */}
       <div className='tile'>
         <a href="#gaugeDemoContainer"><h2>Show Gauges</h2></a>
       </div>
