@@ -26,7 +26,7 @@ ChartJS.register(
 );
 
 interface LineChartProps {
-  valueA: number[];
+  valueA: number[][];
   timeA: number[];
   minY: number;
   maxY: number;
@@ -35,6 +35,8 @@ interface LineChartProps {
 
 export function LineChart({ valueA, timeA, minY, maxY, label }: LineChartProps) {
 
+  // Future jack: 
+  // https://www.chartjs.org/docs/latest/samples/line/multi-axis.html
 
   const options = {
     responsive: true,
@@ -61,7 +63,12 @@ export function LineChart({ valueA, timeA, minY, maxY, label }: LineChartProps) 
     // maintainAspectRatio: false,
   };
 
-  const values = [...valueA]
+  const values = valueA.map((value, index) => {
+    return {
+      x: timeA[index],
+      y: value,
+    };
+  });
   const labels = [...timeA];
 
 
@@ -69,8 +76,9 @@ export function LineChart({ valueA, timeA, minY, maxY, label }: LineChartProps) 
     labels,
     datasets: [
       {
-        label: label,
+        label,
         data: values,
+        fill: false,
         backgroundColor: ['rgba(255, 99, 132, 0.5)'],
       },
     ],

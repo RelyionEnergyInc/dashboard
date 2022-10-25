@@ -18,14 +18,18 @@ function App() {
 
   // State array for the line chart x-axis time labels
   const [labels, setLabels] = React.useState<number[]>([]);
-  // State array for the line chart y-axis values
-  const [values, setValues] = React.useState<number[]>([]);
+  // State 2D array for the line chart y-axis values of the 3 phases
+  const [values, setValues] = React.useState<number[][]>([]);
+  // const [values, setValues] = React.useState<number[]>([]);
 
   useEffect(() => {
-    //Add the current time to the labels array and current freq to the values array
+    //Add the current time to the labels array and current freq to the first row of the values array
     if (labels.length < 10) {
       setLabels([...labels, new Date().getSeconds()]);
-      setValues([...values, freq]);
+      setValues([...values, [freq]]);
+
+      // Add current Vab to the second row of the values array
+      setValues([...values, [vab]]);
     } else {
       // alert('Array is full');
       //Remove the first element of the labels array and the first element of the values array
@@ -34,7 +38,7 @@ function App() {
       setLabels([]);
       setValues([]);
       setLabels([...newLabels, new Date().getSeconds()]);
-      setValues([...newValues, freq]);
+      setValues([...newValues, [freq]]);
       //Add the current time to the labels array and current freq to the values array
     }
   }, [idx, freq]);
@@ -80,6 +84,8 @@ function App() {
           flexDirection: "row", justifyContent: "space-evenly"
         }}>
           <div >
+            {/* Freq: divide by 1000 */}
+            {/* Pf -0.8 0 0.8 */}
             <GaugeModels val1={freq % 100} />
           </div>
           <div>
@@ -140,7 +146,19 @@ function App() {
           </div>
           {/* create a second line chart with values % by 100 */}
           <div>
-            <LineChart valueA={values.map((value) => value % 50)} timeA={labels} minY={0} maxY={100} label={"Frequency % 50"} />
+
+            {/* Current, Voltage, 1 Pack per graph */}
+            {/* Sep ac: Vac, Vbc, Vca, Ia, Ib Ic; real power, reactive power, system power */}
+            {/* Sep dc: p2, p2, p2 */}
+            <LineChart valueA={
+              // Values mod 50
+              values.map((val) => {
+                return val.map((v) => {
+                  return v % 13
+                })
+              })
+            }
+              timeA={labels} minY={0} maxY={100} label={"Frequency % 13"} />
           </div>
         </div>
       </div>
