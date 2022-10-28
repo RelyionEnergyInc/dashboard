@@ -31,7 +31,7 @@ interface MeterProps {
 
 
 const gaugeStyle = {
-  maxWidth: "20vw",
+  // maxWidth: "20vw",
   height: 250,
 }
 
@@ -90,26 +90,21 @@ export function DoughnutModels({ values, labels }: DoughnutModelProps) {
 
 export function GaugeModels(props: GaugeProps) {
   return (
-
-    <>
-      <div style={gaugeStyle}>
-        <ReactSpeedometer
-          value={props.val1}
-          minValue={0}
-          maxValue={100}
-          segments={800}
-          maxSegmentLabels={5}
-          // startColor="#7CFC00"
-          // endColor="#FF3131"
-          segmentColors={[
-            "#FF3131",
-            "#7CFC00",
-            "#7CFC00",
-            "#7CFC00",
-            "#FF3131",
-          ]}
-        />
-      </div>
-    </>
+    <ReactSpeedometer
+      value={props.val1}
+      minValue={0}
+      maxValue={100}
+      segments={800}
+      maxSegmentLabels={5}
+      // startColor="#7CFC00"
+      // endColor="#FF3131"
+      segmentColors={[
+        "#FF3131",
+        "#7CFC00",
+        "#7CFC00",
+        "#7CFC00",
+        "#FF3131",
+      ]}
+    />
   );
 }

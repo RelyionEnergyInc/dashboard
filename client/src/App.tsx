@@ -44,6 +44,10 @@ function App() {
     }
   }, [idx, freq]);
 
+
+
+
+
   const gaugeArcLengths = [0.2, 0.4, 0.4];
 
   return (
@@ -132,7 +136,7 @@ function App() {
         <div style={{
           maxWidth: "80vw",
         }}>
-          <BarChart valueA={freq % 100} valueB={vab % 100} valueC={pf % 100} />
+          <BarChart valueA={freq % 100} valueB={vab % 100} valueC={pf % 100} label={'Frequency, Vab, & Pf'} />
         </div>
       </div>
 

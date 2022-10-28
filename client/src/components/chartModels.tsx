@@ -57,7 +57,7 @@ export function LineChart({ valueA, timeA, minY, maxY, label }: LineChartProps) 
       },
       title: {
         display: true,
-        text: 'Chart.js Bar Chart',
+        text: label,
       },
     },
     // maintainAspectRatio: false,
@@ -92,9 +92,10 @@ interface BarChartProps {
   valueA: number;
   valueB: number;
   valueC: number;
+  label: string;
 }
 
-export function BarChart({ valueA, valueB, valueC }: BarChartProps) {
+export function BarChart({ valueA, valueB, valueC, label }: BarChartProps) {
   const options = {
     responsive: true,
     plugins: {
@@ -103,7 +104,7 @@ export function BarChart({ valueA, valueB, valueC }: BarChartProps) {
       },
       title: {
         display: true,
-        text: 'Chart.js Bar Chart',
+        text: label,
       },
     },
     // maintainAspectRatio: false,
