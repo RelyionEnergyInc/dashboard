@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import Root from './routes/root';
 import ListDataSamples from './components/listStaticDataSamples';
+import Dashboard from './dashboardLayout.jsx';
 import ErrorPage from './errorPage';
 import reportWebVitals from './reportWebVitals';
 
@@ -31,6 +32,11 @@ const router = createBrowserRouter([
   {
     path: "/data",
     element: <ListDataSamples />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
     errorElement: <ErrorPage />,
   }
 ]);
