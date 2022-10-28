@@ -99,8 +99,15 @@ export function GaugeModels(props: GaugeProps) {
           maxValue={100}
           segments={800}
           maxSegmentLabels={5}
-          startColor="#7CFC00"
-          endColor="#FF3131"
+          // startColor="#7CFC00"
+          // endColor="#FF3131"
+          segmentColors={[
+            "#FF3131",
+            "#7CFC00",
+            "#7CFC00",
+            "#7CFC00",
+            "#FF3131",
+          ]}
         />
       </div>
     </>

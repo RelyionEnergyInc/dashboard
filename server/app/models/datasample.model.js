@@ -230,6 +230,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     sequelize,
     tableName: 'InverterTestData',
+    // tableName: 'inverter1log',
     timestamps: false
   });
 };

@@ -6,6 +6,7 @@ import { GaugeModels, DoughnutModels } from './components/gaugeModels';
 import { LineChart, BarChart } from './components/chartModels';
 import useStore from './store';
 import TestGauge from './components/test.js';
+import GaugeChart from 'react-gauge-chart'
 
 
 function App() {
@@ -75,6 +76,8 @@ function App() {
       <div className='data-list' id="listDemoStaticContainer">
         <ListDataSamples />
       </div> */}
+      {/* <GaugeChart id="gauge-chart1" /> */}
+
       <div className='tile'>
         <a href="#gaugeDemoContainer"><h2>Show Gauges</h2></a>
       </div>
@@ -89,7 +92,7 @@ function App() {
             <GaugeModels val1={freq % 100} />
           </div>
           <div>
-            <GaugeModels val1={pf % 100} />
+            <GaugeModels val1={pf} />
           </div>
           {/* <div> */}
           {/* <GaugeModels val1={50} val2={50} val3={50} /> */}
