@@ -1,3 +1,4 @@
 # eslint cache
 .eslintcache
 /node_modules
+/client/node_modules
