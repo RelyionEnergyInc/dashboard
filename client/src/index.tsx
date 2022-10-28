@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import Root from './routes/root';
+import ListDataSamples from './components/listStaticDataSamples';
 import ErrorPage from './errorPage';
 import reportWebVitals from './reportWebVitals';
 
@@ -27,6 +28,11 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
   },
+  {
+    path: "/data",
+    element: <ListDataSamples />,
+    errorElement: <ErrorPage />,
+  }
 ]);
 
 
