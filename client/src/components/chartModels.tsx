@@ -31,9 +31,10 @@ interface LineChartProps {
   minY: number;
   maxY: number;
   label: string;
+  header?: string;
 }
 
-export function LineChart({ valueA, timeA, minY, maxY, label }: LineChartProps) {
+export function LineChart({ valueA, timeA, minY, maxY, label, header }: LineChartProps) {
 
   // Future jack: 
   // https://www.chartjs.org/docs/latest/samples/line/multi-axis.html
@@ -57,7 +58,7 @@ export function LineChart({ valueA, timeA, minY, maxY, label }: LineChartProps) 
       },
       title: {
         display: true,
-        text: label,
+        text: header,
       },
     },
     // maintainAspectRatio: false,
