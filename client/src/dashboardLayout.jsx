@@ -37,12 +37,12 @@ export class Dashboard extends React.PureComponent {
             items: [1].map(function (i, key, list) {
                 return {
                     i: i.toString(),
-                    x: i * 2,
+                    x: 0,
                     y: 0,
                     w: 2,
-                    h: 2,
+                    h: 1,
                     add: i === (list.length + 1),
-                    widget: 'none'
+                    widget: 'add'
                 };
             }),
             newCounter: 0
@@ -63,54 +63,67 @@ export class Dashboard extends React.PureComponent {
         };
         const i = el.add ? "+" : el.i;
         return (
-            <div key={i} data-grid={el}
-                style={{
-                    backgroundColor: "lightblue",
-                    border: "1px solid black",
-                    borderRadius: "25px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                    alignItems: "center",
-                }}>
-                {el.widget === 'none' ? (
+
+            el.widget === 'add' ? (
+                <div key={i} data-grid={el}
+                    style={{
+                        backgroundColor: "lightblue",
+                        border: "1px dashed black",
+                        borderRadius: "25px",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-evenly",
+                        alignItems: "center",
+                        overflow: "hidden",
+                        opacity: "0.5",
+                    }}>
                     <span
                         className="add text"
                         onClick={this.onAddItem}
                         title="You can add an item by clicking here, too."
                     >
-                        Add +
+                        Add Widgets Above
                     </span>
-                ) : el.widget === 'doughnut' ? (
-                    <>
-                        <span className="text" style={{ paddingTop: '1rem' }}>{this.state.items.indexOf(el) + ". "}{" " + el.widget}</span>
-                        <DoughnutModels values={[10, 20, 30]} labels={[['Frequency', 'Vab', 'PF']]} />
-                        <span className="react-resizable-handle react-resizable-handle-se" style={{ fontSize: '0.5rem', paddingRight: '1rem' }}> Resize</span>
-                    </>
-                ) : el.widget === 'gauge' ? (
-                    <>
-                        <span className="text" style={{ paddingTop: '1rem' }}>{this.state.items.indexOf(el) + ". "}{" " + el.widget}</span>
-                        <GaugeModels values={[10, 20, 30]} labels={[['Frequency', 'Vab', 'PF']]} />
-                        <span className="react-resizable-handle react-resizable-handle-se" style={{ fontSize: '0.5rem', paddingRight: '1rem' }}> Resize</span>
-                    </>
-                ) : (
-                    <div>
-                        idk
-                    </div>
-                )}
+                </div>
+            ) : el.widget === 'Doughnut' ? (
+                <div key={i} data-grid={el}
+                    style={{
+                        backgroundColor: "lightblue",
+                        border: "1px solid black",
+                        borderRadius: "25px",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-evenly",
+                        alignItems: "center",
+                        overflow: "hidden",
+                    }}>
+                    <span className="text" style={{ paddingTop: '1rem' }}>{this.state.items.indexOf(el) + ". "}{" " + el.widget}</span>
+                    <DoughnutModels values={[10, 20, 30]} labels={[['Frequency', 'Vab', 'PF']]} />
+                    <span className="react-resizable-handle react-resizable-handle-se" style={{ fontSize: '0.5rem', paddingRight: '1rem' }}> Resize</span>
+                </div>
+            ) : el.widget === 'Gauge' ? (
+                <div key={i} data-grid={el}
+                    style={{
+                        backgroundColor: "lightblue",
+                        border: "1px solid black",
+                        borderRadius: "25px",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-evenly",
+                        alignItems: "center",
+                        overflow: "hidden",
+                    }}>
+                    <span className="text" style={{ paddingTop: '1rem' }}>{this.state.items.indexOf(el) + ". "}{" " + el.widget}</span>
+                    <GaugeModels values={[10, 20, 30]} labels={[['Frequency', 'Vab', 'PF']]} />
+                    <span className="react-resizable-handle react-resizable-handle-se" style={{ fontSize: '0.5rem', paddingRight: '1rem' }}> Resize</span>
+                </div>
+            ) : (
+                <div>
+                    idk
+                </div>
+            )
 
-                {/* <span
-                    className="remove"
-                    style={removeStyle}
-                    onClick={this.onRemoveItem.bind(this, i)}
-                >
-                    x
-                </span> */}
-                {/* Doesnt seem to work inside item... */}
-                {/* <button onClick={this.onRemoveItem.bind(this, i)}>
-                    Remove
-                </button> */}
-            </div>
+
         );
     }
 
@@ -163,13 +176,24 @@ export class Dashboard extends React.PureComponent {
         return (
             <div>
                 {/* <button onClick={this.onAddItem('doughnut')}>Add Doughnut</button> */}
-                <button onClick={() => this.onAddItem('doughnut')}>Add Doughnut</button>
-                <button onClick={() => this.onAddItem('gauge')}>Add Gauge</button>
-                {/* <button onClick={this.onAddItem('gauge')}>Add Gauge</button> */}
-                {/* Button to remove last item in list */}
-                <button onClick={this.onRemoveItem.bind(this, this.state.items[this.state.items.length - 1].i)}>
-                    Remove Last Item
-                </button>
+                <div style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    width: '100vw',
+                    padding: '1rem',
+                    alignItems: "center",
+                    justifyContent: "space-evenly",
+                    backgroundColor: "lightblue",
+                }}>
+                    <button onClick={() => this.onAddItem('Doughnut')} style={{ backgroundColor: 'lightGreen' }}>Add Doughnut</button>
+                    <button onClick={() => this.onAddItem('Gauge')} style={{ backgroundColor: 'lightGreen' }}>Add Gauge</button>
+                    {/* <button onClick={this.onAddItem('gauge')}>Add Gauge</button> */}
+                    {/* Button to remove last item in list */}
+                    <button onClick={this.onRemoveItem.bind(this, this.state.items[this.state.items.length - 1].i)} style={{ backgroundColor: 'coral' }}>
+                        Remove Last Item
+                    </button>
+
+                </div>
                 <ResponsiveReactGridLayout
                     onLayoutChange={this.onLayoutChange}
                     onBreakpointChange={this.onBreakpointChange}

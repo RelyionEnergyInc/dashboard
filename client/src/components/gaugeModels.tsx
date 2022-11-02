@@ -90,6 +90,7 @@ export function DoughnutModels({ values, labels }: DoughnutModelProps) {
 
 export function GaugeModels(props: GaugeProps) {
   return (
+    // <div style={{ maxWidth: '100%', overflow: 'hidden' }}>
     <ReactSpeedometer
       value={props.val1}
       minValue={0}
@@ -106,5 +107,6 @@ export function GaugeModels(props: GaugeProps) {
         "#FF3131",
       ]}
     />
+    // </div>
   );
 }
