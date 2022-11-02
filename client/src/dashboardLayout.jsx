@@ -34,14 +34,15 @@ export class Dashboard extends React.PureComponent {
 
 
         this.state = {
-            items: [1, 2, 3].map(function (i, key, list) {
+            items: [1].map(function (i, key, list) {
                 return {
                     i: i.toString(),
                     x: i * 2,
                     y: 0,
                     w: 2,
                     h: 2,
-                    add: i === (list.length + 1)
+                    add: i === (list.length + 1),
+                    widget: 'none'
                 };
             }),
             newCounter: 0
@@ -69,11 +70,10 @@ export class Dashboard extends React.PureComponent {
                     borderRadius: "25px",
                     display: "flex",
                     flexDirection: "column",
-                    justifyContent: "center",
+                    justifyContent: "space-evenly",
                     alignItems: "center",
-                    margin: "10px",
                 }}>
-                {el.add ? (
+                {el.widget === 'none' ? (
                     <span
                         className="add text"
                         onClick={this.onAddItem}
@@ -81,13 +81,24 @@ export class Dashboard extends React.PureComponent {
                     >
                         Add +
                     </span>
-                ) : (
+                ) : el.widget === 'doughnut' ? (
                     <>
-                        <span className="text">{i}</span>
+                        <span className="text" style={{ paddingTop: '1rem' }}>{this.state.items.indexOf(el) + ". "}{" " + el.widget}</span>
                         <DoughnutModels values={[10, 20, 30]} labels={[['Frequency', 'Vab', 'PF']]} />
-                        <span className="react-resizable-handle react-resizable-handle-se"></span>
+                        <span className="react-resizable-handle react-resizable-handle-se" style={{ fontSize: '0.5rem', paddingRight: '1rem' }}> Resize</span>
                     </>
+                ) : el.widget === 'gauge' ? (
+                    <>
+                        <span className="text" style={{ paddingTop: '1rem' }}>{this.state.items.indexOf(el) + ". "}{" " + el.widget}</span>
+                        <GaugeModels values={[10, 20, 30]} labels={[['Frequency', 'Vab', 'PF']]} />
+                        <span className="react-resizable-handle react-resizable-handle-se" style={{ fontSize: '0.5rem', paddingRight: '1rem' }}> Resize</span>
+                    </>
+                ) : (
+                    <div>
+                        idk
+                    </div>
                 )}
+
                 {/* <span
                     className="remove"
                     style={removeStyle}
@@ -103,7 +114,7 @@ export class Dashboard extends React.PureComponent {
         );
     }
 
-    onAddItem() {
+    onAddItem(widget) {
         /*eslint no-console: 0*/
         console.log("adding", "n" + this.state.items.length + 1);
         this.setState({
@@ -113,7 +124,8 @@ export class Dashboard extends React.PureComponent {
                 x: (this.state.items.length * 2) % (this.state.cols || 12),
                 y: Infinity, // puts it at the bottom
                 w: 2,
-                h: 2
+                h: 3,
+                widget: widget
             }),
             // Increment the counter to ensure key is always unique.
             newCounter: this.state.newCounter + 1
@@ -150,7 +162,10 @@ export class Dashboard extends React.PureComponent {
     render() {
         return (
             <div>
-                <button onClick={this.onAddItem}>Add Item</button>
+                {/* <button onClick={this.onAddItem('doughnut')}>Add Doughnut</button> */}
+                <button onClick={() => this.onAddItem('doughnut')}>Add Doughnut</button>
+                <button onClick={() => this.onAddItem('gauge')}>Add Gauge</button>
+                {/* <button onClick={this.onAddItem('gauge')}>Add Gauge</button> */}
                 {/* Button to remove last item in list */}
                 <button onClick={this.onRemoveItem.bind(this, this.state.items[this.state.items.length - 1].i)}>
                     Remove Last Item
