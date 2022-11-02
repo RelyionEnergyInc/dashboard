@@ -2,7 +2,7 @@ import Draggable, { DraggableCore } from 'react-draggable';
 import GridLayout from "react-grid-layout";
 
 import { Button } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { GaugeModels, DoughnutModels } from './components/gaugeModels';
 import ListLiveDataSamples from './components/listLiveDataSamples';
@@ -11,13 +11,180 @@ import useStore from './store';
 
 // import GaugeChart from 'react-gauge-chart';
 
-const Dashboard = () => {
+
+import { WidthProvider, Responsive } from "react-grid-layout";
+import _ from "lodash";
+import { borderRadius } from '@mui/system';
+const ResponsiveReactGridLayout = WidthProvider(Responsive);
+
+/**
+ * This layout demonstrates how to use a grid with a dynamic number of elements.
+ */
+export class Dashboard extends React.PureComponent {
+    static defaultProps = {
+        className: "layout",
+        cols: { lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 },
+        rowHeight: 100
+    };
+
+
+
+    constructor(props) {
+        super(props);
+
+
+        this.state = {
+            items: [1, 2, 3].map(function (i, key, list) {
+                return {
+                    i: i.toString(),
+                    x: i * 2,
+                    y: 0,
+                    w: 2,
+                    h: 2,
+                    add: i === (list.length + 1)
+                };
+            }),
+            newCounter: 0
+        };
+
+        this.onAddItem = this.onAddItem.bind(this);
+        this.onBreakpointChange = this.onBreakpointChange.bind(this);
+    }
+
+    createElement(el) {
+        const removeStyle = {
+            position: "absolute",
+            right: "10%",
+            top: "5%",
+            cursor: "pointer",
+            backgroundColor: "red",
+            borderRadius: '50%',
+        };
+        const i = el.add ? "+" : el.i;
+        return (
+            <div key={i} data-grid={el}
+                style={{
+                    backgroundColor: "lightblue",
+                    border: "1px solid black",
+                    borderRadius: "25px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    margin: "10px",
+                }}>
+                {el.add ? (
+                    <span
+                        className="add text"
+                        onClick={this.onAddItem}
+                        title="You can add an item by clicking here, too."
+                    >
+                        Add +
+                    </span>
+                ) : (
+                    <>
+                        <span className="text">{i}</span>
+                        <DoughnutModels values={[10, 20, 30]} labels={[['Frequency', 'Vab', 'PF']]} />
+                        <span className="react-resizable-handle react-resizable-handle-se"></span>
+                    </>
+                )}
+                {/* <span
+                    className="remove"
+                    style={removeStyle}
+                    onClick={this.onRemoveItem.bind(this, i)}
+                >
+                    x
+                </span> */}
+                {/* Doesnt seem to work inside item... */}
+                {/* <button onClick={this.onRemoveItem.bind(this, i)}>
+                    Remove
+                </button> */}
+            </div>
+        );
+    }
+
+    onAddItem() {
+        /*eslint no-console: 0*/
+        console.log("adding", "n" + this.state.items.length + 1);
+        this.setState({
+            // Add a new item. It must have a unique key!
+            items: this.state.items.concat({
+                i: "n" + this.state.newCounter,
+                x: (this.state.items.length * 2) % (this.state.cols || 12),
+                y: Infinity, // puts it at the bottom
+                w: 2,
+                h: 2
+            }),
+            // Increment the counter to ensure key is always unique.
+            newCounter: this.state.newCounter + 1
+        });
+    }
+
+    // We're using the cols coming back from this to calculate where to add new items.
+    onBreakpointChange(breakpoint, cols) {
+        console.log("onBreakpointChange", breakpoint, cols);
+        this.setState({
+            breakpoint: breakpoint,
+            cols: cols
+        });
+    }
+
+    onLayoutChange(layout) {
+        console.log("onLayoutChange", layout);
+        // this.props.onLayoutChange(layout);
+        // this.setState({ layout: layout });
+    }
+
+    onRemoveItem(i) {
+        if (this.state.items.length > 1) {
+            console.log("removing", i);
+            this.setState({
+                // Update the items state to remove the item with the given key
+                items: this.state.items.filter(item => item.i !== i)
+            });
+        }
+        else
+            console.log("Cannot remove last item");
+    }
+
+    render() {
+        return (
+            <div>
+                <button onClick={this.onAddItem}>Add Item</button>
+                {/* Button to remove last item in list */}
+                <button onClick={this.onRemoveItem.bind(this, this.state.items[this.state.items.length - 1].i)}>
+                    Remove Last Item
+                </button>
+                <ResponsiveReactGridLayout
+                    onLayoutChange={this.onLayoutChange}
+                    onBreakpointChange={this.onBreakpointChange}
+                    {...this.props}
+                >
+                    {_.map(this.state.items, el => this.createElement(el))}
+                </ResponsiveReactGridLayout>
+            </div>
+        );
+    }
+}
+
+if (process.env.STATIC_EXAMPLES === true) {
+    import("./test-hook.jsx").then(fn => fn.default(Dashboard));
+}
+
+
+
+
+
+
+
+const Dashboard2 = () => {
     // eventLogger = (e: MouseEvent, data: Object) => {
     //     console.log('Event: ', e);
     //     console.log('Data: ', data);
     // };
+    const availableHandles = ["s", "w", "e", "n", "sw", "nw", "se", "ne"];
     const layout = [
-        { i: "1", x: 0, y: 0, w: 4, h: 10 },
+        { i: "1", x: 0, y: 0, w: 4, h: 10, resizeHandles: availableHandles },
         { i: "2", x: 1, y: 0, w: 3, h: 3 },
         { i: "3", x: 4, y: 0, w: 2, h: 5 },
         { i: "4", x: 1, y: 4, w: 3.5, h: 5 }
@@ -69,6 +236,8 @@ const Dashboard = () => {
 
 
     }
+
+
     console.log("idx: ", idx);
 
     return (<>
@@ -77,7 +246,7 @@ const Dashboard = () => {
             <ListLiveDataSamples />
         </div>
 
-        <Button variant='contained' onClick={addDoughnut()}>Add Doughnut</Button>
+        <Button variant='contained' onClick={addDoughnut()}>Add Gauge</Button>
         <GridLayout
             className="layout"
             id="layout"
@@ -85,6 +254,7 @@ const Dashboard = () => {
             cols={12}
             rowHeight={30}
             width={1200}
+            onLayoutChange={function () { }}
         >
 
             <div key="1" style={{ backgroundColor: 'lightyellow' }}>
@@ -107,6 +277,9 @@ const Dashboard = () => {
             <div key="4" style={{ backgroundColor: 'lightgray', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <GaugeModels val1={45} />
             </div>
+
+
+
         </GridLayout>
     </>
     );
