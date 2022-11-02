@@ -117,6 +117,21 @@ export class Dashboard extends React.PureComponent {
                     <GaugeModels values={[10, 20, 30]} labels={[['Frequency', 'Vab', 'PF']]} />
                     <span className="react-resizable-handle react-resizable-handle-se" style={{ fontSize: '0.5rem', paddingRight: '1rem' }}> Resize</span>
                 </div>
+            ) : el.widget === 'Line Chart' ? (
+                <div key={i} data-grid={el}
+                    style={{
+                        backgroundColor: "lightblue",
+                        border: "1px solid black",
+                        borderRadius: "25px",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-evenly",
+                        alignItems: "center",
+                        overflow: "hidden",
+                    }}>
+                    <span className="text" style={{ paddingTop: '1rem' }}>{this.state.items.indexOf(el) + ". "}{" " + el.widget}</span>
+                    <LineChart valueA={[10, 20, 40, 70, 100]} timeA={[1, 2, 3, 4, 5]} minY={0} maxY={100} label={"Frequency % 30"} header={"Frequency Line Chart"} />
+                </div>
             ) : (
                 <div>
                     idk
@@ -187,6 +202,7 @@ export class Dashboard extends React.PureComponent {
                 }}>
                     <button onClick={() => this.onAddItem('Doughnut')} style={{ backgroundColor: 'lightGreen' }}>Add Doughnut</button>
                     <button onClick={() => this.onAddItem('Gauge')} style={{ backgroundColor: 'lightGreen' }}>Add Gauge</button>
+                    <button onClick={() => this.onAddItem('Line Chart')} style={{ backgroundColor: 'lightGreen' }}>Add LineChart</button>
                     {/* <button onClick={this.onAddItem('gauge')}>Add Gauge</button> */}
                     {/* Button to remove last item in list */}
                     <button onClick={this.onRemoveItem.bind(this, this.state.items[this.state.items.length - 1].i)} style={{ backgroundColor: 'coral' }}>
