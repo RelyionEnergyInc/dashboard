@@ -14,7 +14,8 @@ import useStore from './store';
 
 import { WidthProvider, Responsive } from "react-grid-layout";
 import _ from "lodash";
-import { borderRadius } from '@mui/system';
+
+const originalLayouts = getFromLS("layouts") || {};
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
 /**
@@ -31,22 +32,72 @@ export class Dashboard extends React.PureComponent {
 
     constructor(props) {
         super(props);
-
+        console.log("Local storage layout:", originalLayouts);
 
         this.state = {
-            items: [1].map(function (i, key, list) {
-                return {
-                    i: i.toString(),
-                    x: 0,
-                    y: 0,
-                    w: 2,
-                    h: 1,
-                    add: i === (list.length + 1),
-                    widget: 'add'
-                };
-            }),
+            layouts: JSON.parse(JSON.stringify(originalLayouts)),
+
+            // If a layout is saved to local storage, initialize the items
+            // with that layout. If not, use a default layout.
+            items:
+                // this.layouts.bind(this).map(function (i, key, list) {
+                //     return {
+                //         i: i.toString(),
+                //         x: 0,
+                //         y: 0,
+                //         w: 2,
+                //         h: 1,
+                //         add: i === (list.length + 1),
+                //         widget: 'add'
+                //     };
+                // })
+                // ||
+                [1].map(function (i, key, list) {
+                    return {
+                        i: i.toString(),
+                        x: 0,
+                        y: 0,
+                        w: 2,
+                        h: 1,
+                        add: i === (list.length + 1),
+                        widget: 'add'
+                    };
+                }),
             newCounter: 0
         };
+        if (originalLayouts) {
+            originalLayouts.forEach((layout, i) => {
+                console.log("idx:", i);
+                console.log("i:", JSON.parse(JSON.stringify(layout.i)));
+                console.log("x:", layout.x);
+                console.log("y:", layout.y);
+                console.log("w:", layout.w);
+                console.log("h:", layout.h);
+                console.log("widget:", layout.widget);
+            });
+            // console.log("Local storage layout:", originalLayouts);
+            // // this.state = {
+            // //     ...this.state,
+            // //     items: this.generateDOM()
+            // // };
+            // this.state = {
+            //     ...this.state,
+            //     items: originalLayouts.map(function (i, key, list) {
+            //         return {
+            //             i: i.toString(),
+            //             x: i * 2,
+            //             y: 0,
+            //             w: 2,
+            //             h: 1,
+            //             add: i === (list.length + 1),
+            //             widget: 'add'
+            //         };
+            //     }
+            //     )
+            // };
+
+
+        }
 
         this.onAddItem = this.onAddItem.bind(this);
         this.onBreakpointChange = this.onBreakpointChange.bind(this);
@@ -88,7 +139,7 @@ export class Dashboard extends React.PureComponent {
             ) : el.widget === 'Doughnut' ? (
                 <div key={i} data-grid={el}
                     style={{
-                        backgroundColor: "lightblue",
+                        backgroundColor: "lightgray",
                         border: "1px solid black",
                         borderRadius: "25px",
                         display: "flex",
@@ -96,15 +147,20 @@ export class Dashboard extends React.PureComponent {
                         justifyContent: "space-evenly",
                         alignItems: "center",
                         overflow: "hidden",
+                        width: "100%",
+                        height: "100%",
                     }}>
                     <span className="text" style={{ paddingTop: '1rem' }}>{this.state.items.indexOf(el) + ". "}{" " + el.widget}</span>
-                    <DoughnutModels values={[10, 20, 30]} labels={[['Frequency', 'Vab', 'PF']]} />
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <DoughnutModels values={[10, 20, 30]} labels={[['Frequency', 'Vab', 'PF']]} />
+                    </div>
                     <span className="react-resizable-handle react-resizable-handle-se" style={{ fontSize: '0.5rem', paddingRight: '1rem' }}> Resize</span>
                 </div>
             ) : el.widget === 'Gauge' ? (
                 <div key={i} data-grid={el}
                     style={{
-                        backgroundColor: "lightblue",
+                        //Pastel green
+                        backgroundColor: "#d1f2eb",
                         border: "1px solid black",
                         borderRadius: "25px",
                         display: "flex",
@@ -120,7 +176,7 @@ export class Dashboard extends React.PureComponent {
             ) : el.widget === 'Line Chart' ? (
                 <div key={i} data-grid={el}
                     style={{
-                        backgroundColor: "lightblue",
+                        backgroundColor: "lightyellow",
                         border: "1px solid black",
                         borderRadius: "25px",
                         display: "flex",
@@ -171,6 +227,14 @@ export class Dashboard extends React.PureComponent {
 
     onLayoutChange(layout) {
         console.log("onLayoutChange", layout);
+        // create and save items from layout in storage
+
+        this.setState({ layout: layout });
+        if (this.state.items.length > 1) {
+            saveToLS("layouts", layout);
+            console.log("Saved to local storage: ", layout);
+        }
+
         // this.props.onLayoutChange(layout);
         // this.setState({ layout: layout });
     }
@@ -211,8 +275,9 @@ export class Dashboard extends React.PureComponent {
 
                 </div>
                 <ResponsiveReactGridLayout
-                    onLayoutChange={this.onLayoutChange}
+                    onLayoutChange={this.onLayoutChange.bind(this)}
                     onBreakpointChange={this.onBreakpointChange}
+                    // layout={originalLayouts}
                     {...this.props}
                 >
                     {_.map(this.state.items, el => this.createElement(el))}
@@ -338,6 +403,31 @@ const Dashboard2 = () => {
         </GridLayout>
     </>
     );
+}
+
+
+
+function getFromLS(key) {
+    let ls = {};
+    if (global.localStorage) {
+        try {
+            ls = JSON.parse(global.localStorage.getItem("rgl-8")) || {};
+        } catch (e) {
+            /*Ignore*/
+        }
+    }
+    return ls[key];
+}
+
+function saveToLS(key, value) {
+    if (global.localStorage) {
+        global.localStorage.setItem(
+            "rgl-8",
+            JSON.stringify({
+                [key]: value
+            })
+        );
+    }
 }
 
 export default Dashboard;
