@@ -85,7 +85,7 @@ function App() {
         <ListLiveDataSamples />
 
       </div>
-      <h2>{Vavg}</h2>
+      <h3 style={{ fontStyle: 'italic' }}>Update #: {idx}</h3>
 
       {/* <div className='tile'>
         <a href="#listDemoStaticContainer"><h2>Show Static Data List</h2></a>
@@ -95,51 +95,42 @@ function App() {
       </div> */}
       {/* <GaugeChart id="gauge-chart1" /> */}
 
-      <div className='tile'>
-        <a href="#gaugeDemoContainer"><h2> Gauges</h2></a>
-      </div>
-      <div className='tile-content' id="gaugeDemoContainer">
+      <div style={{
+        width: "95vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'flex-start', backgroundColor: 'lightGrey', borderRadius: '25px', padding: '1vw'
+      }}>
+        <h1 style={{ marginBottom: 0, marginLeft: '1rem' }}> System Status </h1>
         <div style={{
-          width: "100vw", display: "flex",
-          flexDirection: "row", justifyContent: "space-evenly"
+          display: "flex", flexDirection: "row", justifyContent: "space-evenly", alignItems: 'center', width: '100%'
         }}>
-          <div >
-            {/* Freq: divide by 1000 */}
-            {/* Pf -0.8 0 0.8 */}
-            <GaugeModels val1={FanSpeed} unit={'${value} RPM'} min={0} max={6000} numLabels={2} sectionColors={[
-              "#FF3131",
-              "#FF3131",
-              "#86ff70",
-              "#86ff70",
-              "#86ff70",
-              "#86ff70",
-              "#86ff70",
-              "#86ff70",
-              "#FF3131"
-            ]}
-              title={'Fan Speed'} />
-          </div>
-          <div>
-            <GaugeModels val1={Vavg} title={'Avg Voltage'} unit={'${value} V'} max={1000} numLabels={3} />
-          </div>
-          <div>
-            <GaugeModels val1={pf} title={'Power Factor'} unit={'${value} kW'} numLabels={5} />
-          </div>
-          {/* <div> */}
-          {/* <GaugeModels val1={50} val2={50} val3={50} /> */}
-
-          {/* <GaugeChart id="gauge-chart"
-              textColor="#333"
-              nrOfLevels={3}
-              arcsLength={[0.8, 0.15, 0.05]}
-              colors={["#5BE12C", "#F5CD19", "#EA4228"]}
-              percent={0.4273035096951447}
-              arcPadding={0.02}
-
-            /> */}
-          {/* </div> */}
+          {/* Freq: divide by 1000 */}
+          {/* Pf -0.8 0 0.8 */}
+          <GaugeModels val1={FanSpeed} unit={'${value} RPM'} min={0} max={6000} numLabels={2} sectionColors={[
+            "#FF3131",
+            "#FF3131",
+            "#86ff70",
+            "#86ff70",
+            "#86ff70",
+            "#86ff70",
+            "#86ff70",
+            "#86ff70",
+            "#FF3131"
+          ]}
+            title={'Fan Speed'} />
+          <GaugeModels val1={OnboardTemp} unit={'${value} °K'} min={0} max={500} numLabels={2} />
         </div>
       </div>
+      <div style={{
+        width: "100vw", display: "flex",
+        flexDirection: "row", justifyContent: "space-evenly"
+      }}>
+        <div>
+          <GaugeModels val1={Vavg} title={'Avg Voltage'} unit={'${value} V'} max={1000} numLabels={3} />
+        </div>
+        <div>
+          <GaugeModels val1={pf} title={'Power Factor'} unit={'${value} kW'} numLabels={5} />
+        </div>
+      </div>
+      {/* </div> */}
       <div className='tile'>
         <a href="#doughnutDemoContainer"><h2> Doughnuts</h2></a>
       </div>
