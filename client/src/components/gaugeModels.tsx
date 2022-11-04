@@ -12,9 +12,13 @@ interface DoughnutModelProps {
 
 
 interface GaugeProps {
-  val1?: number;
-  unit1?: string;
   title?: string;
+  val1?: number;
+  unit?: string;
+  max?: number;
+  min?: number;
+  numLabels?: number;
+  sectionColors?: string[];
 }
 
 interface MeterProps {
@@ -94,21 +98,24 @@ export function GaugeModels(props: GaugeProps) {
     }}>
       <ReactSpeedometer
         value={props.val1}
-        minValue={0}
-        maxValue={100}
+        currentValueText={props.unit}
+        minValue={props.min || 0}
+        maxValue={props.max || 100}
         segments={800}
         width={300}
         height={180}
-        maxSegmentLabels={5}
+        maxSegmentLabels={props.numLabels || 5}
         // startColor="#7CFC00"
         // endColor="#FF3131"
-        segmentColors={[
-          "#FF3131",
-          "#7CFC00",
-          "#7CFC00",
-          "#7CFC00",
-          "#FF3131",
-        ]}
+        segmentColors={
+          props.sectionColors ||
+          [
+            "#FF3131",
+            "#7CFC00",
+            "#7CFC00",
+            "#7CFC00",
+            "#FF3131",
+          ]}
       />
       <h2>{props.title}</h2>
     </div>

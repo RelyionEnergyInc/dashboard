@@ -94,7 +94,19 @@ function App() {
           <div >
             {/* Freq: divide by 1000 */}
             {/* Pf -0.8 0 0.8 */}
-            <GaugeModels val1={FanSpeed} title={'Fan Speed'} />
+            <GaugeModels val1={FanSpeed} unit={'${value} RPM'} min={0} max={6000} numLabels={2} sectionColors={[
+              "#FF3131",
+              "#FF3131",
+              "#FF3131",
+              "#7CFC00",
+              "#7CFC00",
+              "#7CFC00",
+              "#7CFC00",
+              "#7CFC00",
+              "#7CFC00",
+              "#FF3131"
+            ]}
+              title={'Fan Speed'} />
           </div>
           <div>
             <GaugeModels val1={pf} title={'pF'} />
