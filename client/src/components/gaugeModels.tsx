@@ -10,16 +10,11 @@ interface DoughnutModelProps {
   labels: string[];
 }
 
-interface GaugeModelProps {
-  value: number;
-  label: string;
-  levelCount: number;
-  arcLengths: number[];
-}
 
 interface GaugeProps {
   val1?: number;
   unit1?: string;
+  title?: string;
 }
 
 interface MeterProps {
@@ -91,22 +86,31 @@ export function DoughnutModels({ values, labels }: DoughnutModelProps) {
 export function GaugeModels(props: GaugeProps) {
   return (
     // <div style={{ maxWidth: '100%', overflow: 'hidden' }}>
-    <ReactSpeedometer
-      value={props.val1}
-      minValue={0}
-      maxValue={100}
-      segments={800}
-      maxSegmentLabels={5}
-      // startColor="#7CFC00"
-      // endColor="#FF3131"
-      segmentColors={[
-        "#FF3131",
-        "#7CFC00",
-        "#7CFC00",
-        "#7CFC00",
-        "#FF3131",
-      ]}
-    />
-    // </div>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column',
+    }}>
+      <ReactSpeedometer
+        value={props.val1}
+        minValue={0}
+        maxValue={100}
+        segments={800}
+        width={300}
+        height={180}
+        maxSegmentLabels={5}
+        // startColor="#7CFC00"
+        // endColor="#FF3131"
+        segmentColors={[
+          "#FF3131",
+          "#7CFC00",
+          "#7CFC00",
+          "#7CFC00",
+          "#FF3131",
+        ]}
+      />
+      <h2>{props.title}</h2>
+    </div>
   );
 }

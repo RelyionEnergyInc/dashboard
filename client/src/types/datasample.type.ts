@@ -1,3 +1,6 @@
+
+// YOU WILL NEED TO MAKE THESE MATCH THE REAL DB SCHEMA
+
 export default interface DataSample {
     id: number;
     time: Date;

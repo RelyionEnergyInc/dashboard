@@ -14,6 +14,7 @@ function App() {
   const freq = useStore(state => state.currentSample.freq);
   const vab = useStore(state => state.currentSample.Vab);
   const pf = useStore(state => state.currentSample.pf);
+  const FanSpeed = useStore(state => state.currentSample["Fan Speed"]);
 
 
 
@@ -83,7 +84,7 @@ function App() {
       {/* <GaugeChart id="gauge-chart1" /> */}
 
       <div className='tile'>
-        <a href="#gaugeDemoContainer"><h2>Show Gauges</h2></a>
+        <a href="#gaugeDemoContainer"><h2> Gauges</h2></a>
       </div>
       <div className='tile-content' id="gaugeDemoContainer">
         <div style={{
@@ -93,10 +94,10 @@ function App() {
           <div >
             {/* Freq: divide by 1000 */}
             {/* Pf -0.8 0 0.8 */}
-            <GaugeModels val1={freq % 100} />
+            <GaugeModels val1={FanSpeed} title={'Fan Speed'} />
           </div>
           <div>
-            <GaugeModels val1={pf} />
+            <GaugeModels val1={pf} title={'pF'} />
           </div>
           {/* <div> */}
           {/* <GaugeModels val1={50} val2={50} val3={50} /> */}
@@ -114,7 +115,7 @@ function App() {
         </div>
       </div>
       <div className='tile'>
-        <a href="#doughnutDemoContainer"><h2>Show Doughnuts</h2></a>
+        <a href="#doughnutDemoContainer"><h2> Doughnuts</h2></a>
       </div>
       <div className='tile-content' id="doughnutDemoContainer">
         <div style={{
@@ -130,7 +131,7 @@ function App() {
         </div>
       </div>
       <div className='tile'>
-        <a href="#barDemoContainer"><h2>Show Bars</h2></a>
+        <a href="#barDemoContainer"><h2> Bars</h2></a>
       </div>
       <div className='tile-content' id="barDemoContainer">
         <div style={{
@@ -141,7 +142,7 @@ function App() {
       </div>
 
       <div className='tile'>
-        <a href="#lineDemoContainer"><h2>Show Lines</h2></a>
+        <a href="#lineDemoContainer"><h2> Lines</h2></a>
       </div>
       <div className='tile-content' id="lineDemoContainer">
         <div style={{

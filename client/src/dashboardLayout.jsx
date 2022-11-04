@@ -53,7 +53,24 @@ export class Dashboard extends React.PureComponent {
                 // })
                 // ||
                 [1].map(function (i, key, list) {
+                    console.log("Saved layout", originalLayouts);
+                    // if (originalLayouts.length > 1) {
+                    //     originalLayouts.map(function (i, key, list) {
+                    //         return {
+                    //             i: i.toString(),
+                    //             x: 0,
+                    //             y: 0,
+                    //             w: 2,
+                    //             h: 1,
+                    //             add: i === (list.length + 1),
+                    //             // Get widget type from substring after first space in i
+                    //             widget: 'add',
+                    //         };
+                    //     })
+                    // } else {
+
                     return {
+                        // an invisible element to initialize grid
                         i: i.toString(),
                         x: 0,
                         y: 0,
@@ -62,10 +79,12 @@ export class Dashboard extends React.PureComponent {
                         add: i === (list.length + 1),
                         widget: 'add'
                     };
+                    // }
                 }),
             newCounter: 0
         };
-        if (originalLayouts) {
+        if (originalLayouts && originalLayouts.length > 0) {
+            console.log("originalLayouts:", originalLayouts.length);
             originalLayouts.forEach((layout, i) => {
                 console.log("idx:", i);
                 console.log("i:", JSON.parse(JSON.stringify(layout.i)));
@@ -204,7 +223,7 @@ export class Dashboard extends React.PureComponent {
         this.setState({
             // Add a new item. It must have a unique key!
             items: this.state.items.concat({
-                i: "n" + this.state.newCounter,
+                i: "n" + this.state.newCounter + " " + widget,
                 x: (this.state.items.length * 2) % (this.state.cols || 12),
                 y: Infinity, // puts it at the bottom
                 w: 2,
@@ -251,6 +270,24 @@ export class Dashboard extends React.PureComponent {
             console.log("Cannot remove last item");
     }
 
+    // Run this.onAddItem for each item in originalLayouts on page load
+    componentDidMount() {
+        for (let i = 0; i < 5; i++) {
+            // this.onAddItem('Doughnut');
+        }
+        // if (originalLayouts.length > 0) {
+        //     originalLayouts.map((item) => {
+        //         this.onAddItem('Doughnut');
+        //         console.log("Added item: ", item);
+        //         return null;
+        //     });
+        // }
+        // else {
+        //     console.log("No layouts in local storage");
+        // }
+    }
+
+
     render() {
         return (
             <div>
@@ -264,14 +301,19 @@ export class Dashboard extends React.PureComponent {
                     justifyContent: "space-evenly",
                     backgroundColor: "lightblue",
                 }}>
-                    <button onClick={() => this.onAddItem('Doughnut')} style={{ backgroundColor: 'lightGreen' }}>Add Doughnut</button>
-                    <button onClick={() => this.onAddItem('Gauge')} style={{ backgroundColor: 'lightGreen' }}>Add Gauge</button>
-                    <button onClick={() => this.onAddItem('Line Chart')} style={{ backgroundColor: 'lightGreen' }}>Add LineChart</button>
+                    <button onClick={() => this.onAddItem('Doughnut')} style={{ backgroundColor: 'lightGreen', borderRadius: '15px' }}>Add Doughnut</button>
+                    <button onClick={() => this.onAddItem('Gauge')} style={{ backgroundColor: 'lightGreen', borderRadius: '15px' }}>Add Gauge</button>
+                    <button onClick={() => this.onAddItem('Line Chart')} style={{ backgroundColor: 'lightGreen', borderRadius: '15px' }}>Add LineChart</button>
                     {/* <button onClick={this.onAddItem('gauge')}>Add Gauge</button> */}
                     {/* Button to remove last item in list */}
-                    <button onClick={this.onRemoveItem.bind(this, this.state.items[this.state.items.length - 1].i)} style={{ backgroundColor: 'coral' }}>
+                    <button onClick={this.onRemoveItem.bind(this, this.state.items[this.state.items.length - 1].i)} style={{ backgroundColor: 'coral', borderRadius: '15px' }}>
                         Remove Last Item
                     </button>
+                    {/* Clear local storage */}
+                    <button onClick={() => clearLS()} style={{ backgroundColor: 'coral', borderRadius: '15px' }}>
+                        Clear Local Storage
+                    </button>
+
 
                 </div>
                 <ResponsiveReactGridLayout
@@ -280,8 +322,27 @@ export class Dashboard extends React.PureComponent {
                     // layout={originalLayouts}
                     {...this.props}
                 >
+
                     {_.map(this.state.items, el => this.createElement(el))}
+
+
+
                 </ResponsiveReactGridLayout>
+                {originalLayouts && originalLayouts.length > 0 ? (
+                    _.map(originalLayouts, el => this.createElement(el)),
+
+                    originalLayouts.map((layout, i) => (
+                        <div key={i} className="layout">
+                            <span className="text">Local Widget #{i + 1}</span>
+                            <pre>{JSON.stringify(layout, null, "  ")}</pre>
+                        </div>
+                    ))
+                ) : (
+                    <div className="layout">
+                        <span className="text">No layouts in local storage.</span>
+                    </div>
+                )}
+
             </div>
         );
     }
@@ -428,6 +489,11 @@ function saveToLS(key, value) {
             })
         );
     }
+}
+
+function clearLS() {
+    if (global.localStorage)
+        global.localStorage.removeItem("rgl-8");
 }
 
 export default Dashboard;
