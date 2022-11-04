@@ -45,7 +45,7 @@
   background-color: #afdafb;
   cursor: pointer;
   border-radius: 25px;
-  display: flex;
+  display: none;
   justify-content: flex-start;
   align-items: center;
   padding-left: 5%;

@@ -96,6 +96,7 @@ export function GaugeModels(props: GaugeProps) {
       alignItems: 'center',
       flexDirection: 'column',
     }}>
+      <h3>{props.title}</h3>
       <ReactSpeedometer
         value={props.val1}
         currentValueText={props.unit}
@@ -109,15 +110,9 @@ export function GaugeModels(props: GaugeProps) {
         // endColor="#FF3131"
         segmentColors={
           props.sectionColors ||
-          [
-            "#FF3131",
-            "#7CFC00",
-            "#7CFC00",
-            "#7CFC00",
-            "#FF3131",
-          ]}
+          ['lightblue']}
       />
-      <h2>{props.title}</h2>
+
     </div>
   );
 }

@@ -12,8 +12,18 @@ import GaugeChart from 'react-gauge-chart'
 function App() {
   const idx = useStore(state => state.currentSample.id);
   const freq = useStore(state => state.currentSample.freq);
-  const vab = useStore(state => state.currentSample.Vab);
+
+
+  const vab = Number(useStore(state => state.currentSample.Vab));
+  const Vbc = Number(useStore(state => state.currentSample.Vbc));
+  const Vca = Number(useStore(state => state.currentSample.Vca));
+
+  const Vavg = Math.round((vab + Vbc + Vca) / 3);
+
+
   const pf = useStore(state => state.currentSample.pf);
+
+  const OnboardTemp = useStore(state => state.currentSample["Onboard Temp"]);
   const FanSpeed = useStore(state => state.currentSample["Fan Speed"]);
 
 
@@ -51,6 +61,8 @@ function App() {
 
   const gaugeArcLengths = [0.2, 0.4, 0.4];
 
+
+
   return (
     <div style={{
       display: "flex",
@@ -73,7 +85,7 @@ function App() {
         <ListLiveDataSamples />
 
       </div>
-      <h2>{idx}</h2>
+      <h2>{Vavg}</h2>
 
       {/* <div className='tile'>
         <a href="#listDemoStaticContainer"><h2>Show Static Data List</h2></a>
@@ -88,7 +100,7 @@ function App() {
       </div>
       <div className='tile-content' id="gaugeDemoContainer">
         <div style={{
-          width: "80vw", display: "flex",
+          width: "100vw", display: "flex",
           flexDirection: "row", justifyContent: "space-evenly"
         }}>
           <div >
@@ -97,19 +109,21 @@ function App() {
             <GaugeModels val1={FanSpeed} unit={'${value} RPM'} min={0} max={6000} numLabels={2} sectionColors={[
               "#FF3131",
               "#FF3131",
-              "#FF3131",
-              "#7CFC00",
-              "#7CFC00",
-              "#7CFC00",
-              "#7CFC00",
-              "#7CFC00",
-              "#7CFC00",
+              "#86ff70",
+              "#86ff70",
+              "#86ff70",
+              "#86ff70",
+              "#86ff70",
+              "#86ff70",
               "#FF3131"
             ]}
               title={'Fan Speed'} />
           </div>
           <div>
-            <GaugeModels val1={pf} title={'pF'} />
+            <GaugeModels val1={Vavg} title={'Avg Voltage'} unit={'${value} V'} max={1000} numLabels={3} />
+          </div>
+          <div>
+            <GaugeModels val1={pf} title={'Power Factor'} unit={'${value} kW'} numLabels={5} />
           </div>
           {/* <div> */}
           {/* <GaugeModels val1={50} val2={50} val3={50} /> */}
@@ -131,7 +145,7 @@ function App() {
       </div>
       <div className='tile-content' id="doughnutDemoContainer">
         <div style={{
-          width: "80vw", display: "flex",
+          width: "100vw", display: "flex",
           flexDirection: "row", justifyContent: "space-evenly"
         }}>
           <div>
@@ -147,7 +161,7 @@ function App() {
       </div>
       <div className='tile-content' id="barDemoContainer">
         <div style={{
-          maxWidth: "80vw",
+          maxWidth: "100vw",
         }}>
           <BarChart valueA={freq % 100} valueB={vab % 100} valueC={pf % 100} label={'Frequency, Vab, & Pf'} />
         </div>
@@ -158,7 +172,7 @@ function App() {
       </div>
       <div className='tile-content' id="lineDemoContainer">
         <div style={{
-          width: "80vw", display: "flex",
+          width: "100vw", display: "flex",
           flexDirection: "row", justifyContent: "space-evenly"
         }}>
           <div>
