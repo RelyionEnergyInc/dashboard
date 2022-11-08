@@ -272,9 +272,7 @@ export class Dashboard extends React.PureComponent {
 
     // Run this.onAddItem for each item in originalLayouts on page load
     componentDidMount() {
-        for (let i = 0; i < 5; i++) {
-            // this.onAddItem('Doughnut');
-        }
+        
         // if (originalLayouts.length > 0) {
         //     originalLayouts.map((item) => {
         //         this.onAddItem('Doughnut');

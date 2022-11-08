@@ -27,14 +27,15 @@ ChartJS.register(
 
 interface LineChartProps {
   valueA: number[][];
-  timeA: number[];
+  timeA: Date[];
   minY: number;
   maxY: number;
   label: string;
   header?: string;
+  title?: string;
 }
 
-export function LineChart({ valueA, timeA, minY, maxY, label, header }: LineChartProps) {
+export function LineChart({ valueA, timeA, minY, maxY, label, header, title }: LineChartProps) {
 
   // Future jack: 
   // https://www.chartjs.org/docs/latest/samples/line/multi-axis.html
@@ -43,9 +44,8 @@ export function LineChart({ valueA, timeA, minY, maxY, label, header }: LineChar
     responsive: true,
     scales: {
       y: {
-        min: minY,
-        max: maxY,
-        stepSize: 5,
+        suggestedMin: minY,
+        suggestedMax: maxY,
       },
       x:
       {
@@ -61,7 +61,8 @@ export function LineChart({ valueA, timeA, minY, maxY, label, header }: LineChar
         text: header,
       },
     },
-    // maintainAspectRatio: false,
+    maintainAspectRatio: false,
+    aspectRatio: 1 / 5,
   };
 
   const values = valueA.map((value, index) => {
@@ -70,7 +71,12 @@ export function LineChart({ valueA, timeA, minY, maxY, label, header }: LineChar
       y: value,
     };
   });
-  const labels = [...timeA];
+  // Set labels to the seconds of the timeA array
+  const labels = timeA.map((time) => {
+    return time.getHours() % 12 + ':' + time.getMinutes() + ':' + time.getSeconds();
+  });
+  // const labels = [...timeA];
+
 
 
   const data = {
@@ -85,7 +91,16 @@ export function LineChart({ valueA, timeA, minY, maxY, label, header }: LineChar
     ],
   };
   return (
-    <Line data={data} options={options} height={300} />
+    <div style={{
+      display: 'flex',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      flexDirection: 'column',
+      maxHeight: '15rem',
+    }}>
+      <h3>{title}</h3>
+      <Line data={data} options={options} height={200} style={{ marginTop: '-3rem', paddingBottom: '3rem' }} />
+    </div>
   )
 }
 

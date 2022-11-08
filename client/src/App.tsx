@@ -18,18 +18,22 @@ function App() {
   const Vbc = Number(useStore(state => state.currentSample.Vbc));
   const Vca = Number(useStore(state => state.currentSample.Vca));
 
+  const Ia = Number(useStore(state => state.currentSample.Ia));
+  const Ib = Number(useStore(state => state.currentSample.Ib));
+  const Ic = Number(useStore(state => state.currentSample.Ic));
+
   const Vavg = Math.round((vab + Vbc + Vca) / 3);
 
 
   const pf = useStore(state => state.currentSample.pf);
 
-  const OnboardTemp = useStore(state => state.currentSample["Onboard Temp"]);
+  const OnboardTemp = Number(useStore(state => state.currentSample["Onboard Temp"]));
   const FanSpeed = useStore(state => state.currentSample["Fan Speed"]);
 
 
 
   // State array for the line chart x-axis time labels
-  const [labels, setLabels] = React.useState<number[]>([]);
+  const [labels, setLabels] = React.useState<Date[]>([]);
   // State 2D array for the line chart y-axis values of the 3 phases
   const [values, setValues] = React.useState<number[][]>([]);
   // const [values, setValues] = React.useState<number[]>([]);
@@ -37,7 +41,7 @@ function App() {
   useEffect(() => {
     //Add the current time to the labels array and current freq to the first row of the values array
     if (labels.length < 10) {
-      setLabels([...labels, new Date().getSeconds()]);
+      setLabels([...labels, new Date()]);
       setValues([...values, [freq]]);
 
       // Add current Vab to the second row of the values array
@@ -49,11 +53,31 @@ function App() {
       const newValues = values.slice(1);
       setLabels([]);
       setValues([]);
-      setLabels([...newLabels, new Date().getSeconds()]);
+      setLabels([...newLabels, new Date()]);
       setValues([...newValues, [freq]]);
       //Add the current time to the labels array and current freq to the values array
     }
   }, [idx, freq]);
+
+
+  // Current Line Chart Values
+  const [currLabels, setCurrLabels] = React.useState<Date[]>([]);
+  const [currValues, setCurrValues] = React.useState<number[][]>([]);
+  useEffect(() => {
+    const avgCurrent = (Ia + Ib + Ic) / 3;
+
+    if (currLabels.length < 10) {
+      setCurrLabels([...currLabels, new Date()]);
+      setCurrValues([...currValues, [avgCurrent]]);
+    } else {
+      const newLabels = currLabels.slice(1);
+      const newValues = currValues.slice(1);
+      setCurrLabels([]);
+      setCurrValues([]);
+      setCurrLabels([...newLabels, new Date()]);
+      setCurrValues([...newValues, [avgCurrent]]);
+    }
+  }, [idx, Ia, Ib, Ic]);
 
 
 
@@ -96,7 +120,7 @@ function App() {
       {/* <GaugeChart id="gauge-chart1" /> */}
 
       <div style={{
-        width: "95vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'flex-start', backgroundColor: 'lightGrey', borderRadius: '25px', padding: '1vw'
+        width: "95vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'flex-start', backgroundColor: 'lightGrey', borderRadius: '25px', padding: '1vw', margin: '1vw'
       }}>
         <h1 style={{ marginBottom: 0, marginLeft: '1rem' }}> System Status </h1>
         <div style={{
@@ -116,18 +140,34 @@ function App() {
             "#FF3131"
           ]}
             title={'Fan Speed'} />
-          <GaugeModels val1={OnboardTemp} unit={'${value} °K'} min={0} max={500} numLabels={2} />
+          <GaugeModels val1={OnboardTemp / 10} unit={'${value} °C'} min={0} max={100} numLabels={4} sectionColors={[
+            "#86ff70",
+            "#86ff70",
+            "#86ff70",
+            "#86ff70",
+            "#FF3131"
+          ]} title={'Temperature'} />
         </div>
       </div>
+
+
       <div style={{
-        width: "100vw", display: "flex",
-        flexDirection: "row", justifyContent: "space-evenly"
+        width: "95vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'flex-start', backgroundColor: '#AFE1AF', borderRadius: '25px', padding: '1vw', margin: '1vw'
       }}>
-        <div>
-          <GaugeModels val1={Vavg} title={'Avg Voltage'} unit={'${value} V'} max={1000} numLabels={3} />
-        </div>
-        <div>
-          <GaugeModels val1={pf} title={'Power Factor'} unit={'${value} kW'} numLabels={5} />
+        <h1 style={{ marginBottom: 0, marginLeft: '1rem' }}> System Energy </h1>
+        <div style={{
+          display: "flex", flexDirection: "row", justifyContent: "space-evenly", alignItems: 'flex-start', width: '100%'
+        }}>
+          <div>
+            <GaugeModels val1={Vavg} title={'Avg Voltage'} unit={'${value} V'} max={1000} numLabels={3} />
+          </div>
+
+          <div>
+            <GaugeModels val1={pf} title={'Power Factor'} unit={'${value} kW'} numLabels={5} />
+          </div>
+          <div>
+            <LineChart valueA={currValues} timeA={currLabels} minY={0} maxY={60} label={'(Ia + Ib + Ic) ÷ 3 '} title={'Current'} />
+          </div>
         </div>
       </div>
       {/* </div> */}

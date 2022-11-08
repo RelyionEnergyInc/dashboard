@@ -110,7 +110,7 @@ export function GaugeModels(props: GaugeProps) {
         // endColor="#FF3131"
         segmentColors={
           props.sectionColors ||
-          ['lightblue']}
+          ['#E5E4E2']}
       />
 
     </div>
