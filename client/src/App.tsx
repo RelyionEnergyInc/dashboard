@@ -30,6 +30,7 @@ function App() {
 
   const OnboardTemp = Number(useStore(state => state.currentSample["Onboard Temp"]));
   const FanSpeed = useStore(state => state.currentSample["Fan Speed"]);
+  const SystemPower = useStore(state => state.currentSample["System Power"]);
 
   const SystemStatus = useStore(state => state.currentSample["System Status"]);
   const GridSupportStatus = useStore(state => state.currentSample["Grid Support Status"]);
@@ -124,10 +125,8 @@ function App() {
       </div> */}
       {/* <GaugeChart id="gauge-chart1" /> */}
 
-      <div style={{
-        width: "95vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'flex-start', backgroundColor: 'lightGrey', borderRadius: '25px', padding: '1vw', margin: '1vw'
-      }}>
-        <h1 style={{ marginBottom: 0, marginLeft: '1rem' }}> System Status </h1>
+      <div className='demo-section' style={{ backgroundColor: 'lightGrey' }}>
+        <h1 > System Status </h1>
         <div style={{
           display: "flex", flexDirection: "row", justifyContent: "space-evenly", alignItems: 'center', width: '100%'
         }}>
@@ -157,15 +156,14 @@ function App() {
           }}>
             <TextValueModel label={"System Status"} value={SystemStatus} valueColor={'white'} />
             <TextValueModel label={"Grid Support Status"} value={GridSupportStatus} valueColor={'white'} />
+            <TextValueModel label={"System Power"} value={SystemPower} valueColor={'white'} />
           </div>
         </div>
       </div>
 
 
-      <div style={{
-        width: "95vw", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'flex-start', backgroundColor: '#AFE1AF', borderRadius: '25px', padding: '1vw', margin: '1vw'
-      }}>
-        <h1 style={{ marginBottom: 0, marginLeft: '1rem' }}> System Energy </h1>
+      <div className='demo-section' style={{ backgroundColor: '#AFE1AF' }}>
+        <h1> System Energy </h1>
         <div style={{
           display: "flex", flexDirection: "row", justifyContent: "space-evenly", alignItems: 'flex-start', width: '100%'
         }}>
@@ -178,7 +176,7 @@ function App() {
           </div>
           <div>
 
-            <LineChart valueA={currValues} timeA={currLabels} xAxisLabel={"Time"} yAxisLabel={"Current ( A )"} minY={0} maxY={60} label={'(Ia + Ib + Ic) ÷ 3 '} title={'Current'} />
+            <LineChart valueA={currValues} timeA={currLabels} xAxisLabel={"Time"} yAxisLabel={"Current ( A )"} minY={10} maxY={50} label={'(Ia + Ib + Ic) ÷ 3 '} title={'Current'} />
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import {
   Legend,
   PointElement,
   LineElement,
+  Filler,
 } from 'chart.js';
 import { Bar, Line } from 'react-chartjs-2';
 
@@ -22,7 +23,8 @@ ChartJS.register(
   Tooltip,
   Legend,
   PointElement,
-  LineElement
+  LineElement,
+  Filler,
 );
 
 interface LineChartProps {
@@ -48,6 +50,11 @@ export function LineChart({ valueA, timeA, xAxisLabel, yAxisLabel, minY, maxY, l
       y: {
         suggestedMin: minY,
         suggestedMax: maxY,
+        ticks: {
+          // Change desnity of y-axis labels here
+          autoSkip: true,
+          maxTicksLimit: 7
+        },
         title: {
           display: yAxisLabel !== undefined,
           text: yAxisLabel,
@@ -94,7 +101,8 @@ export function LineChart({ valueA, timeA, xAxisLabel, yAxisLabel, minY, maxY, l
       {
         label,
         data: values,
-        fill: false,
+        fill: true,
+        pointBackgroundColor: 'rgba(255, 99, 132, 0.9)',
         backgroundColor: ['rgba(255, 99, 132, 0.5)'],
       },
     ],
