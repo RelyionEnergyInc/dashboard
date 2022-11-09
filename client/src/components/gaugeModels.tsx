@@ -19,6 +19,7 @@ interface GaugeProps {
   min?: number;
   numLabels?: number;
   sectionColors?: string[];
+  useGradient?: boolean;
 }
 
 interface MeterProps {
@@ -97,22 +98,41 @@ export function GaugeModels(props: GaugeProps) {
       flexDirection: 'column',
     }}>
       <h3>{props.title}</h3>
-      <ReactSpeedometer
-        value={props.val1}
-        currentValueText={props.unit}
-        minValue={props.min || 0}
-        maxValue={props.max || 100}
-        segments={800}
-        width={300}
-        height={180}
-        maxSegmentLabels={props.numLabels || 5}
-        // startColor="#7CFC00"
-        // endColor="#FF3131"
-        segmentColors={
-          props.sectionColors ||
-          ['#E5E4E2']}
-      />
+      {!props.useGradient ?
+        <ReactSpeedometer
+          value={props.val1}
+          currentValueText={props.unit}
+          minValue={props.min || 0}
+          maxValue={props.max || 100}
+          segments={800}
+          width={300}
+          height={180}
+          maxSegmentLabels={props.numLabels || 5}
+          // startColor="#7CFC00"
+          // endColor="#FF3131"
+          segmentColors={
+            props.sectionColors ||
+            ['#E5E4E2']}
+        />
+        :
+        <ReactSpeedometer
+          value={props.val1}
+          currentValueText={props.unit}
+          minValue={props.min || 0}
+          maxValue={props.max || 100}
+          segments={5000}
+          width={300}
+          height={180}
+          maxSegmentLabels={props.numLabels || 5}
+          // startColor="#7CFC00"
+          // endColor="#FF3131"
+          startColor={'yellow'}
+          endColor={'green'}
+        />
+      }
+
 
     </div>
   );
 }
+

@@ -42,10 +42,10 @@ function App() {
     //Add the current time to the labels array and current freq to the first row of the values array
     if (labels.length < 10) {
       setLabels([...labels, new Date()]);
-      setValues([...values, [freq]]);
+      setValues([...values, [freq | 0]]);
 
       // Add current Vab to the second row of the values array
-      setValues([...values, [vab]]);
+      setValues([...values, [vab | 0]]);
     } else {
       // alert('Array is full');
       //Remove the first element of the labels array and the first element of the values array
@@ -54,7 +54,7 @@ function App() {
       setLabels([]);
       setValues([]);
       setLabels([...newLabels, new Date()]);
-      setValues([...newValues, [freq]]);
+      setValues([...newValues, [freq | 0]]);
       //Add the current time to the labels array and current freq to the values array
     }
   }, [idx, freq]);
@@ -68,7 +68,7 @@ function App() {
 
     if (currLabels.length < 10) {
       setCurrLabels([...currLabels, new Date()]);
-      setCurrValues([...currValues, [avgCurrent]]);
+      setCurrValues([...currValues, [avgCurrent | 0]]);
     } else {
       const newLabels = currLabels.slice(1);
       const newValues = currValues.slice(1);
@@ -77,6 +77,7 @@ function App() {
       setCurrLabels([...newLabels, new Date()]);
       setCurrValues([...newValues, [avgCurrent]]);
     }
+    console.log('Current Values: ', currValues);
   }, [idx, Ia, Ib, Ic]);
 
 
@@ -163,16 +164,17 @@ function App() {
           </div>
 
           <div>
-            <GaugeModels val1={pf} title={'Power Factor'} unit={'${value} kW'} numLabels={5} />
+            <GaugeModels val1={pf} title={'Power Factor'} unit={'${value} kW'} useGradient={true} />
           </div>
           <div>
+
             <LineChart valueA={currValues} timeA={currLabels} minY={0} maxY={60} label={'(Ia + Ib + Ic) ÷ 3 '} title={'Current'} />
           </div>
         </div>
       </div>
       {/* </div> */}
       <div className='tile'>
-        <a href="#doughnutDemoContainer"><h2> Doughnuts</h2></a>
+        <a href="#doughnutDemoContainer"><h2>Doughnuts</h2></a>
       </div>
       <div className='tile-content' id="doughnutDemoContainer">
         <div style={{
