@@ -168,7 +168,7 @@ function App() {
           </div>
           <div>
 
-            <LineChart valueA={currValues} timeA={currLabels} minY={0} maxY={60} label={'(Ia + Ib + Ic) ÷ 3 '} title={'Current'} />
+            <LineChart valueA={currValues} timeA={currLabels} xAxisLabel={"Time"} yAxisLabel={"Current ( A )"} minY={0} maxY={60} label={'(Ia + Ib + Ic) ÷ 3 '} title={'Current'} />
           </div>
         </div>
       </div>

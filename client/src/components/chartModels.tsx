@@ -27,6 +27,8 @@ ChartJS.register(
 
 interface LineChartProps {
   valueA: number[][];
+  xAxisLabel?: string;
+  yAxisLabel?: string;
   timeA: Date[];
   minY: number;
   maxY: number;
@@ -35,7 +37,7 @@ interface LineChartProps {
   title?: string;
 }
 
-export function LineChart({ valueA, timeA, minY, maxY, label, header, title }: LineChartProps) {
+export function LineChart({ valueA, timeA, xAxisLabel, yAxisLabel, minY, maxY, label, header, title }: LineChartProps) {
 
   // Future jack: 
   // https://www.chartjs.org/docs/latest/samples/line/multi-axis.html
@@ -46,10 +48,17 @@ export function LineChart({ valueA, timeA, minY, maxY, label, header, title }: L
       y: {
         suggestedMin: minY,
         suggestedMax: maxY,
+        title: {
+          display: yAxisLabel !== undefined,
+          text: yAxisLabel,
+        },
       },
       x:
       {
-
+        title: {
+          display: xAxisLabel !== undefined,
+          text: xAxisLabel,
+        },
       },
     },
     plugins: {
