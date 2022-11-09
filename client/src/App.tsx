@@ -7,6 +7,7 @@ import { LineChart, BarChart } from './components/chartModels';
 import useStore from './store';
 import TestGauge from './components/test.js';
 import GaugeChart from 'react-gauge-chart'
+import TextValueModel from './components/textValueModel';
 
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
 
   const OnboardTemp = Number(useStore(state => state.currentSample["Onboard Temp"]));
   const FanSpeed = useStore(state => state.currentSample["Fan Speed"]);
+
+  const SystemStatus = useStore(state => state.currentSample["System Status"]);
+  const GridSupportStatus = useStore(state => state.currentSample["Grid Support Status"]);
 
 
 
@@ -148,6 +152,12 @@ function App() {
             "#86ff70",
             "#FF3131"
           ]} title={'Temperature'} />
+          <div style={{
+            display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'flex-end'
+          }}>
+            <TextValueModel label={"System Status"} value={SystemStatus} valueColor={'white'} />
+            <TextValueModel label={"Grid Support Status"} value={GridSupportStatus} valueColor={'white'} />
+          </div>
         </div>
       </div>
 
