@@ -115,6 +115,10 @@
   justify-self: center;
 }
 
+#compact {
+  max-width: 43%;
+}
+
 .demo-section h1 {
   margin: 0 0 1rem 1rem;
   padding: 0;

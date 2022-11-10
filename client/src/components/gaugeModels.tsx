@@ -20,6 +20,8 @@ interface GaugeProps {
   numLabels?: number;
   sectionColors?: string[];
   useGradient?: boolean;
+  gaugeWidth?: number;
+  gaugeHeight?: number;
 }
 
 interface MeterProps {
@@ -96,6 +98,7 @@ export function GaugeModels(props: GaugeProps) {
       justifyContent: 'center',
       alignItems: 'center',
       flexDirection: 'column',
+      // maxWidth: '100%',
     }}>
       <h3>{props.title}</h3>
       {!props.useGradient ?
@@ -105,8 +108,8 @@ export function GaugeModels(props: GaugeProps) {
           minValue={props.min || 0}
           maxValue={props.max || 100}
           segments={800}
-          width={300}
-          height={180}
+          width={props.gaugeWidth || 300}
+          height={props.gaugeHeight || 180}
           maxSegmentLabels={props.numLabels || 5}
           // startColor="#7CFC00"
           // endColor="#FF3131"
@@ -121,8 +124,8 @@ export function GaugeModels(props: GaugeProps) {
           minValue={props.min || 0}
           maxValue={props.max || 100}
           segments={5000}
-          width={300}
-          height={180}
+          width={props.gaugeWidth || 300}
+          height={props.gaugeHeight || 180}
           maxSegmentLabels={props.numLabels || 5}
           // startColor="#7CFC00"
           // endColor="#FF3131"

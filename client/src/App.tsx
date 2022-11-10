@@ -151,19 +151,6 @@ function App() {
       <h3 style={{ fontStyle: 'italic' }}>Update #: {idx}</h3>
       <div className='demo-grid'>
 
-        {/* <h3>P2 Current: {P2Current}   ←Shouldn't be 0</h3>
-      <h3>P3 Voltage: {P3Voltage}   ←Shouldn't be 0</h3>
-      <h3>P3 Current: {P3Current}   ←Shouldn't be 0</h3> */}
-
-
-        {/* <div className='tile'>
-        <a href="#listDemoStaticContainer"><h2>Show Static Data List</h2></a>
-      </div>
-      <div className='data-list' id="listDemoStaticContainer">
-        <ListDataSamples />
-      </div> */}
-        {/* <GaugeChart id="gauge-chart1" /> */}
-
         <div className='demo-section' style={{ backgroundColor: 'lightGrey' }}>
           <h1 > System Status </h1>
           <div className='demo-section-widgets'>
@@ -209,22 +196,37 @@ function App() {
           </div>
         </div>
 
-        <div className='demo-section' style={{ backgroundColor: '#66e4de81' }}>
-          <h1> P2 Energy </h1>
-          <div className='demo-section-widgets'>
-            <GaugeModels val1={P2Voltage} title={'P2 Voltage'} unit={'${value} V'} max={1000} numLabels={3} />
-            <GaugeModels val1={P2Power} title={'P2 Power'} unit={'${value} kWh'} max={100} numLabels={3} />
-            <LineChart valueA={p2CurrValues} timeA={p2CurrLabels} xAxisLabel={"Time"} yAxisLabel={"Current ( A )"} minY={0} maxY={5} label={'Current'} title={'P2 Current'} fill={true} />
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}>
+          <div className='demo-section' id='compact' style={{ backgroundColor: '#66e4de81' }}>
+            <h1> P2 Energy </h1>
+            <div className='demo-section-widgets'>
+              <div style={{
+                display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'center'
+              }}>
+                <GaugeModels val1={P2Voltage} title={'P2 Voltage'} unit={'${value} V'} max={1000} numLabels={3} gaugeWidth={150} gaugeHeight={100} />
+
+                <GaugeModels val1={P2Power} title={'P2 Power'} unit={'${value} kWh'} max={100} numLabels={3} gaugeWidth={150} gaugeHeight={100} />
+              </div>
+              <LineChart valueA={p2CurrValues} timeA={p2CurrLabels} xAxisLabel={"Time"} yAxisLabel={"Current ( A )"} minY={0} maxY={5} label={'Current'} title={'P2 Current'} fill={true} />
+            </div>
           </div>
-        </div>
 
-        <div className='demo-section' style={{ backgroundColor: '#66e4de81' }}>
-          <h1> P3 Energy </h1>
-          <div className='demo-section-widgets'>
-            <GaugeModels val1={P3Voltage} title={'P3 Voltage'} unit={'${value} V'} max={1000} numLabels={3} />
-            <GaugeModels val1={P3Power} title={'P3 Power'} unit={'${value} kWh'} max={100} numLabels={3} />
-            <LineChart valueA={p3CurrValues} timeA={p3CurrLabels} xAxisLabel={"Time"} yAxisLabel={"Current ( A )"} minY={0} maxY={5} label={'Current'} title={'P3 Current'} fill={true} />
+          <div className='demo-section' id='compact' style={{ backgroundColor: '#66e4de81' }}>
+            <h1> P3 Energy </h1>
+            <div className='demo-section-widgets'>
+              <div style={{
+                display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'center'
+              }}>
+                <GaugeModels val1={P3Voltage} title={'P3 Voltage'} unit={'${value} V'} max={1000} numLabels={3} gaugeWidth={150} gaugeHeight={100} />
+                <GaugeModels val1={P3Power} title={'P3 Power'} unit={'${value} kWh'} max={100} numLabels={3} gaugeWidth={150} gaugeHeight={100} />
+              </div>
+              <LineChart valueA={p3CurrValues} timeA={p3CurrLabels} xAxisLabel={"Time"} yAxisLabel={"Current ( A )"} minY={0} maxY={5} label={'Current'} title={'P3 Current'} fill={true} />
 
+            </div>
           </div>
         </div>
 
