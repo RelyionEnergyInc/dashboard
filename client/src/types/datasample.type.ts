@@ -30,7 +30,7 @@ export default interface DataSample {
     'P2 Current limit': number;
     'P2 Voltage': number;
     'P2 Power': number;
-    'P2 Current': number;
+    'P2  Current': number;
     'P3 Ctrl Method': number;
     'P3 throttle setpt': number;
     'P3 current setpt': number;
@@ -41,9 +41,9 @@ export default interface DataSample {
     'P3 Dischg PWR limit': number;
     'P3 Chrg PWR limit': number;
     'P3 Current limit': number;
-    'P3 Voltage': number;
-    'P3 Power': number;
-    'P3 Current': number;
+    'P3 voltage': number;
+    'P3 power': number;
+    'P3 current': number;
     'Avg PM Temp': number;
     'AC PM Temp': number;
     'DC PM Temp': number;
