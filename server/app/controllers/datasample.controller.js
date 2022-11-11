@@ -16,7 +16,7 @@ exports.findAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Idk an error occurred while retrieving Data Samples."
+          err.message || "An error occurred while retrieving Data Samples."
       });
     });
 };
@@ -41,3 +41,24 @@ exports.findOne = (req, res) => {
       });
     });
 };
+
+exports.findMax = (req, res) => {
+  console.log("YES");
+  const id = req.params.id;
+
+  DataSample.max('Time')
+    .then(data => {
+      if (data) {
+        res.send(data);
+      } else {
+        res.status(404).send({
+          message: `Cannot find Tutorial with id=${id}.`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving Tutorial with id=" + id
+      });
+    });
+}

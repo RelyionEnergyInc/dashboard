@@ -54,16 +54,27 @@ export default class ListLiveDataSamples extends Component {
             dataSamples: [],
             currentDataSample: null,
             currentIndex: 1,
+            maxIndex: 1,
         };
     }
 
 
     componentDidMount() {
         setInterval(() => {
-            this.setState({
-                currentIndex: this.state.currentIndex + 1
-            });
+            
             console.log("incrementing index: " + this.state.currentIndex);
+            // Get the max index from the server
+            DataSampleService.getMax()
+                .then(response => {
+                    this.setState({
+                        maxIndex: response.data
+                    });
+                    console.log("max index: " + this.state.maxIndex);
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+            
         
         //Retrieve data samples from the server given the current index
         DataSampleService.get(this.state.currentIndex)
@@ -71,6 +82,21 @@ export default class ListLiveDataSamples extends Component {
                 this.setState({
                     dataSamples: response.data
                 });
+                // if(response.data.length > 0 || this.state.currentIndex < 3) {
+                //     this.setState({
+                //         currentIndex: this.state.currentIndex + 1
+                //     });
+                // } else {
+                //     console.log("No fresher data available");
+                //     this.setState({
+                //         currentIndex: this.state.currentIndex - 1
+                //     });
+
+                // }
+                    this.setState({
+                    currentIndex: this.state.currentIndex + 1
+                });
+                    
                 console.log(response.data);
             })
             .catch(e => {
@@ -78,6 +104,7 @@ export default class ListLiveDataSamples extends Component {
             });
             // setIdx(this.state.currentIndex);
             setCurrentSample(this.state.dataSamples);
+            
         }, 1000);
     }
 
@@ -148,12 +175,12 @@ export default class ListLiveDataSamples extends Component {
 
 
     render() {
-        const { dataSamples, currentDataSample, currentIndex } = this.state;
+        const { dataSamples, currentDataSample, currentIndex, maxIndex } = this.state;
 
         return (
             <div style={{
                 display: "flex",
-                flexDirection: "column",
+                flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "flex-start",
             }}>
@@ -213,9 +240,20 @@ export default class ListLiveDataSamples extends Component {
                             justifyContent: "center",
                         }}
                     >
-                      Getting Data Sample: <h4>{this.state.currentIndex}</h4>
+                      Getting Data Sample: <h4 style={{margin: '0.5rem'}}>{this.state.currentIndex}</h4>
+                    </div>
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                    >
+                         Max ID: <h4 style={{margin: '0.5rem'}}>{this.state.maxIndex}</h4>
                     </div>
                 </div>
+                
                 </div>
         );
     }

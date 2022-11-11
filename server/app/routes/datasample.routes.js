@@ -9,6 +9,8 @@ module.exports = app => {
 
   router.get("/:id", datasamples.findOne);
 
+  router.get("/max", datasamples.findMax);
+
   // app.get('*', datasamples);
 
   app.use('/api/datasamples', router);

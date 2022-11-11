@@ -148,7 +148,7 @@ function App() {
         <ListLiveDataSamples />
 
       </div>
-      <h3 style={{ fontStyle: 'italic' }}>Update #: {idx}</h3>
+      <h3 style={{ fontStyle: 'italic', textAlign: 'center' }}>Current Sample: {idx}</h3>
       <div className='demo-grid'>
 
         <div className='demo-section' style={{ backgroundColor: 'lightGrey' }}>
@@ -207,7 +207,7 @@ function App() {
               <div style={{
                 display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'center'
               }}>
-                <GaugeModels val1={P2Voltage} title={'P2 Voltage'} unit={'${value} V'} max={1000} numLabels={3} gaugeWidth={150} gaugeHeight={100} />
+                <GaugeModels val1={P2Voltage} title={'P2 Voltage'} unit={'${value} V'} max={1000} numLabels={3} gaugeWidth={150} gaugeHeight={100} useGradient={true} gradientEndColor={"red"} />
 
                 <GaugeModels val1={P2Power} title={'P2 Power'} unit={'${value} kWh'} max={100} numLabels={3} gaugeWidth={150} gaugeHeight={100} />
               </div>
@@ -221,7 +221,7 @@ function App() {
               <div style={{
                 display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'center'
               }}>
-                <GaugeModels val1={P3Voltage} title={'P3 Voltage'} unit={'${value} V'} max={1000} numLabels={3} gaugeWidth={150} gaugeHeight={100} />
+                <GaugeModels val1={P3Voltage} title={'P3 Voltage'} unit={'${value} V'} max={1000} numLabels={3} gaugeWidth={150} gaugeHeight={100} useGradient={true} gradientEndColor={"red"} />
                 <GaugeModels val1={P3Power} title={'P3 Power'} unit={'${value} kWh'} max={100} numLabels={3} gaugeWidth={150} gaugeHeight={100} />
               </div>
               <LineChart valueA={p3CurrValues} timeA={p3CurrLabels} xAxisLabel={"Time"} yAxisLabel={"Current ( A )"} minY={0} maxY={5} label={'Current'} title={'P3 Current'} fill={true} />

@@ -20,6 +20,8 @@ interface GaugeProps {
   numLabels?: number;
   sectionColors?: string[];
   useGradient?: boolean;
+  gradientStartColor?: string;
+  gradientEndColor?: string;
   gaugeWidth?: number;
   gaugeHeight?: number;
 }
@@ -111,8 +113,7 @@ export function GaugeModels(props: GaugeProps) {
           width={props.gaugeWidth || 300}
           height={props.gaugeHeight || 180}
           maxSegmentLabels={props.numLabels || 5}
-          // startColor="#7CFC00"
-          // endColor="#FF3131"
+
           segmentColors={
             props.sectionColors ||
             ['#E5E4E2']}
@@ -123,14 +124,12 @@ export function GaugeModels(props: GaugeProps) {
           currentValueText={props.unit}
           minValue={props.min || 0}
           maxValue={props.max || 100}
-          segments={5000}
+          segments={1000}
           width={props.gaugeWidth || 300}
           height={props.gaugeHeight || 180}
           maxSegmentLabels={props.numLabels || 5}
-          // startColor="#7CFC00"
-          // endColor="#FF3131"
-          startColor={'yellow'}
-          endColor={'green'}
+          startColor={props.gradientStartColor || 'yellow'}
+          endColor={props.gradientEndColor || 'green'}
         />
       }
 

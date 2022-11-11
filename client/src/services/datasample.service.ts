@@ -9,6 +9,10 @@ class DataSampleService {
         return http.get(`/datasamples/${id}`);
     }
 
+    getMax() {
+        return http.get("/datasamples/max");
+    }
+
     // create(data: DataSample) {
     //     return http.post("/datasamples", data);
     // }

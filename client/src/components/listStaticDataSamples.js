@@ -47,11 +47,9 @@ export default class ListDataSamples extends Component {
             currentIndex: -1,
         };
     }
-
     componentDidMount() {
         this.retrieveDataSamples();
     }
-
     retrieveDataSamples() {
         DataSampleService.getAll()
             .then(response => {
@@ -64,7 +62,6 @@ export default class ListDataSamples extends Component {
                 console.log(e);
             });
     }
-
     refreshDataSampleList() {
         this.retrieveDataSamples();
         this.setState({
@@ -92,10 +89,9 @@ export default class ListDataSamples extends Component {
                 alignItems: "center",
                 justifyContent: "flex-start",
                 overflow: "auto"
-
             }}>
                 
-                                        <div style={{padding: '1%'}}>
+            <div style={{padding: '1%'}}>
 
             {currentDataSample ? (
                     <div>
