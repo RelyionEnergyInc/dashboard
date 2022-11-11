@@ -182,10 +182,11 @@ export default class ListLiveDataSamples extends Component {
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
-                justifyContent: "flex-start",
+                justifyContent: "center",
+                width: "100%",
             }}>
-        <div style={{padding: '1%'}}>   
-            <TableContainer component={Paper} sx={{maxHeight: "70vh"}} >
+        <div style={{padding: '1%', width: "80%",}}>   
+            <TableContainer component={Paper} sx={{maxHeight: "70vh", width: "100%",}} >
                     <Table stickyHeader sx={{ 
                         width: "100%",
                         backgroundColor: "lightblue",
@@ -205,6 +206,7 @@ export default class ListLiveDataSamples extends Component {
                                 <StyledTableCell>Vbn</StyledTableCell>
                                 <StyledTableCell>Vcn</StyledTableCell>
                                 <StyledTableCell>pf</StyledTableCell>
+                                <StyledTableCell>Real Power</StyledTableCell>
 
 
                             </TableRow>
@@ -222,6 +224,7 @@ export default class ListLiveDataSamples extends Component {
                                     <StyledTableCell>{dataSamples.Vbn}</StyledTableCell>
                                     <StyledTableCell>{dataSamples.Vcn}</StyledTableCell>
                                     <StyledTableCell>{dataSamples.pf}</StyledTableCell>
+                                    <StyledTableCell>{dataSamples['Real Power']}</StyledTableCell>
 
 
                                 </StyledTableRow>

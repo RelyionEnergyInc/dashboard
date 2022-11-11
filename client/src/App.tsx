@@ -157,8 +157,10 @@ function App() {
             {/* Freq: divide by 1000 */}
             {/* Pf -0.8 0 0.8 */}
             <GaugeModels val1={FanSpeed} unit={'${value} RPM'} min={0} max={6000} numLabels={2} sectionColors={[
+              // "#FF3131",
               "#FF3131",
-              "#FF3131",
+              "#86ff70",
+              "#86ff70",
               "#86ff70",
               "#86ff70",
               "#86ff70",
@@ -169,6 +171,7 @@ function App() {
             ]}
               title={'Fan Speed'} />
             <GaugeModels val1={OnboardTemp / 10} unit={'${value} °C'} min={0} max={100} numLabels={4} sectionColors={[
+              "#86ff70",
               "#86ff70",
               "#86ff70",
               "#86ff70",
@@ -186,11 +189,11 @@ function App() {
         </div>
 
 
-        <div className='demo-section' style={{ backgroundColor: '#AFE1AF' }}>
+        <div className='demo-section' style={{ backgroundColor: 'rgba(109, 174, 109, 0.49)' }}>
           <h1> System Energy </h1>
           <div className='demo-section-widgets'>
-            <GaugeModels val1={Vavg} title={'Avg Voltage'} unit={'${value} V'} max={1000} numLabels={3} />
-            <GaugeModels val1={pf} title={'Power Factor'} unit={'${value} kW'} useGradient={true} />
+            <GaugeModels val1={Vavg} title={'Avg Voltage'} unit={'${value} V'} max={1000} numLabels={3} useGradient={true} gradientStartColor={"#86ff70"} gradientEndColor={"#FF3131"} />
+            <GaugeModels val1={pf} title={'Power Factor'} unit={'${value} kW'} useGradient={true} gradientEndColor={"#86ff70"} />
             <LineChart valueA={currValues} timeA={currLabels} xAxisLabel={"Time"} yAxisLabel={"Current ( A )"} minY={10} maxY={50} label={'(Ia + Ib + Ic) ÷ 3 '} title={'Current'} fill={true} />
 
           </div>
@@ -201,28 +204,28 @@ function App() {
           alignItems: "center",
           justifyContent: "center",
         }}>
-          <div className='demo-section' id='compact' style={{ backgroundColor: '#66e4de81' }}>
+          <div className='demo-section' id='compact' style={{ backgroundColor: 'rgba(138, 169, 202, 0.5)' }}>
             <h1> P2 Energy </h1>
             <div className='demo-section-widgets'>
               <div style={{
                 display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'center'
               }}>
-                <GaugeModels val1={P2Voltage} title={'P2 Voltage'} unit={'${value} V'} max={1000} numLabels={3} gaugeWidth={150} gaugeHeight={100} useGradient={true} gradientEndColor={"red"} />
+                <GaugeModels val1={P2Voltage} title={'P2 Voltage'} unit={'${value} V'} max={1000} numLabels={3} gaugeWidth={150} gaugeHeight={100} useGradient={true} gradientEndColor={"#FF3131"} needleHeightRatio={0.75} />
 
-                <GaugeModels val1={P2Power} title={'P2 Power'} unit={'${value} kWh'} max={100} numLabels={3} gaugeWidth={150} gaugeHeight={100} />
+                <GaugeModels val1={P2Power} title={'P2 Power'} unit={'${value} kWh'} max={100} numLabels={3} gaugeWidth={150} gaugeHeight={100} useGradient={true} gradientStartColor={"#86ff70"} gradientEndColor={"#FF3131"} needleHeightRatio={0.75} />
               </div>
               <LineChart valueA={p2CurrValues} timeA={p2CurrLabels} xAxisLabel={"Time"} yAxisLabel={"Current ( A )"} minY={0} maxY={5} label={'Current'} title={'P2 Current'} fill={true} />
             </div>
           </div>
 
-          <div className='demo-section' id='compact' style={{ backgroundColor: '#66e4de81' }}>
+          <div className='demo-section' id='compact' style={{ backgroundColor: 'rgba(138, 169, 202, 0.5)' }}>
             <h1> P3 Energy </h1>
             <div className='demo-section-widgets'>
               <div style={{
                 display: "flex", flexDirection: "column", justifyContent: "center", alignItems: 'center'
               }}>
-                <GaugeModels val1={P3Voltage} title={'P3 Voltage'} unit={'${value} V'} max={1000} numLabels={3} gaugeWidth={150} gaugeHeight={100} useGradient={true} gradientEndColor={"red"} />
-                <GaugeModels val1={P3Power} title={'P3 Power'} unit={'${value} kWh'} max={100} numLabels={3} gaugeWidth={150} gaugeHeight={100} />
+                <GaugeModels val1={P3Voltage} title={'P3 Voltage'} unit={'${value} V'} max={1000} numLabels={3} gaugeWidth={150} gaugeHeight={100} useGradient={true} gradientEndColor={"#FF3131"} needleHeightRatio={0.75} />
+                <GaugeModels val1={P3Power} title={'P3 Power'} unit={'${value} kWh'} max={100} numLabels={3} gaugeWidth={150} gaugeHeight={100} useGradient={true} gradientStartColor={"#86ff70"} gradientEndColor={"#FF3131"} needleHeightRatio={0.75} />
               </div>
               <LineChart valueA={p3CurrValues} timeA={p3CurrLabels} xAxisLabel={"Time"} yAxisLabel={"Current ( A )"} minY={0} maxY={5} label={'Current'} title={'P3 Current'} fill={true} />
 

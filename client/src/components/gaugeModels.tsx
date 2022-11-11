@@ -24,6 +24,7 @@ interface GaugeProps {
   gradientEndColor?: string;
   gaugeWidth?: number;
   gaugeHeight?: number;
+  needleHeightRatio?: number;
 }
 
 interface MeterProps {
@@ -113,7 +114,7 @@ export function GaugeModels(props: GaugeProps) {
           width={props.gaugeWidth || 300}
           height={props.gaugeHeight || 180}
           maxSegmentLabels={props.numLabels || 5}
-
+          needleHeightRatio={props.needleHeightRatio || 0.9}
           segmentColors={
             props.sectionColors ||
             ['#E5E4E2']}
@@ -130,6 +131,7 @@ export function GaugeModels(props: GaugeProps) {
           maxSegmentLabels={props.numLabels || 5}
           startColor={props.gradientStartColor || 'yellow'}
           endColor={props.gradientEndColor || 'green'}
+          needleHeightRatio={props.needleHeightRatio || 0.9}
         />
       }
 

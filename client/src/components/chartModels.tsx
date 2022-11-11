@@ -38,9 +38,10 @@ interface LineChartProps {
   header?: string;
   title?: string;
   fill?: boolean;
+  fillColor?: string;
 }
 
-export function LineChart({ valueA, timeA, xAxisLabel, yAxisLabel, minY, maxY, label, header, title, fill }: LineChartProps) {
+export function LineChart({ valueA, timeA, xAxisLabel, yAxisLabel, minY, maxY, label, header, title, fill, fillColor }: LineChartProps) {
 
   // Future jack: 
   // https://www.chartjs.org/docs/latest/samples/line/multi-axis.html
@@ -104,7 +105,7 @@ export function LineChart({ valueA, timeA, xAxisLabel, yAxisLabel, minY, maxY, l
         data: values,
         fill: fill,
         pointBackgroundColor: 'rgba(255, 99, 132, 0.9)',
-        backgroundColor: ['rgba(255, 99, 132, 0.5)'],
+        backgroundColor: fillColor || ['rgba(255, 99, 132, 0.5)'],
       },
     ],
   };
