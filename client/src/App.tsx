@@ -156,20 +156,7 @@ function App() {
           <div className='demo-section-widgets'>
             {/* Freq: divide by 1000 */}
             {/* Pf -0.8 0 0.8 */}
-            <GaugeModels val1={FanSpeed} unit={'${value} RPM'} min={0} max={6000} numLabels={2} sectionColors={[
-              // "#FF3131",
-              "#FF3131",
-              "#86ff70",
-              "#86ff70",
-              "#86ff70",
-              "#86ff70",
-              "#86ff70",
-              "#86ff70",
-              "#86ff70",
-              "#86ff70",
-              "#FF3131"
-            ]}
-              title={'Fan Speed'} />
+            <GaugeModels val1={FanSpeed} unit={'${value} RPM'} min={0} max={6000} numLabels={2} title={'Fan Speed'} />
             <GaugeModels val1={OnboardTemp / 10} unit={'${value} °C'} min={0} max={100} numLabels={4} sectionColors={[
               "#86ff70",
               "#86ff70",
@@ -184,6 +171,8 @@ function App() {
               <TextValueModel label={"System Status"} value={SystemStatus} valueColor={'white'} />
               <TextValueModel label={"Grid Support Status"} value={GridSupportStatus} valueColor={'white'} />
               <TextValueModel label={"System Power"} value={SystemPower} valueColor={'white'} />
+              <TextValueModel label={"Frequency"} value={freq / 1000} valueColor={'white'} />
+              <TextValueModel label={"Power Factor"} value={pf} valueColor={'white'} />
             </div>
           </div>
         </div>
@@ -193,7 +182,7 @@ function App() {
           <h1> System Energy </h1>
           <div className='demo-section-widgets'>
             <GaugeModels val1={Vavg} title={'Avg Voltage'} unit={'${value} V'} max={1000} numLabels={3} useGradient={true} gradientStartColor={"#86ff70"} gradientEndColor={"#FF3131"} />
-            <GaugeModels val1={pf} title={'Power Factor'} unit={'${value} kW'} useGradient={true} gradientEndColor={"#86ff70"} />
+            <GaugeModels val1={Math.abs(RealPower)} title={'Real Power'} unit={'${value} kW'} max={100} numLabels={3} />
             <LineChart valueA={currValues} timeA={currLabels} xAxisLabel={"Time"} yAxisLabel={"Current ( A )"} minY={10} maxY={50} label={'(Ia + Ib + Ic) ÷ 3 '} title={'Current'} fill={true} />
 
           </div>
@@ -234,7 +223,7 @@ function App() {
         </div>
 
 
-        <GaugeModels val1={Math.abs(RealPower)} title={'Real Power'} unit={'${value} kW'} max={100} numLabels={3} />
+
 
         {/* </div> */}
         <div className='tile'>

@@ -51,6 +51,7 @@
   padding-left: 5%;
   margin: 1%;
 
+
 }
 
 .tile-content {
@@ -63,6 +64,8 @@
   align-items: center;
   justify-content: center;
   overflow-y: hidden;
+
+  display: none;
 }
 
 .data-list {
