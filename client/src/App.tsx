@@ -182,7 +182,7 @@ function App() {
           <h1> System Energy </h1>
           <div className='demo-section-widgets'>
             <GaugeModels val1={Vavg} title={'Avg Voltage'} unit={'${value} V'} max={1000} numLabels={3} useGradient={true} gradientStartColor={"#86ff70"} gradientEndColor={"#FF3131"} />
-            <GaugeModels val1={Math.abs(RealPower)} title={'Real Power'} unit={'${value} kW'} max={100} numLabels={3} />
+            <GaugeModels val1={Math.abs(RealPower) * 10} title={'Real Power'} unit={'${value} W'} max={1000} numLabels={3} />
             <LineChart valueA={currValues} timeA={currLabels} xAxisLabel={"Time"} yAxisLabel={"Current ( A )"} minY={10} maxY={50} label={'(Ia + Ib + Ic) ÷ 3 '} title={'Current'} fill={true} />
 
           </div>
