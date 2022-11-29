@@ -25,7 +25,7 @@ function App() {
 
   const Vavg = Math.round((vab + Vbc + Vca) / 3);
 
-  const pf = useStore(state => state.currentSample.pf);
+  const pf = Number(useStore(state => state.currentSample.pf)) / 100;
 
   const RealPower = Number(useStore(state => state.currentSample["Real Power"]));
 
@@ -136,7 +136,7 @@ function App() {
 
 
   return (
-    <div style={{ minWidth: '100vw', minHeight: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '5rem' }}>
+    <div className='demo-body'>
       <div style={{
         display: "flex",
         flexDirection: "row",
@@ -182,14 +182,19 @@ function App() {
         <div className='demo-section' style={{ backgroundColor: 'rgba(109, 174, 109, 0.49)' }}>
           <h1> System Energy </h1>
           <div className='demo-section-widgets'>
-            <GaugeModels val1={Vavg} title={'Avg Voltage'} unit={'${value} V'} max={1000} numLabels={3} sectionColors={[
-              // A gradient from red to green to red
-              '#a09450', '#9d9750', '#9a995f', '#979c5f', '#949f5e', '#91a25e', '#8ea55d', '#8ba85d', '#88ab5c', '#85ae5c', '#82b15b', '#7fb45b', '#7cb75a', '#79ba5a', '#76bd59', '#73c059', '#70c358', '#6dc658', '#6ac957', '#67cc57', '#64cf56', '#61d256', '#5ed556', '#5bd855', '#58db55', '#55de54', '#52e154', '#4fe454', '#4ce753', '#49ea53', '#46ed52', '#43f052', '#40f351', '#3df651', '#3af950', '#37fc50', '#34ff4f', '#34ff4f', '#37fc50', '#3af950', '#3df651', '#40f351', '#43f052', '#46ed52', '#49ea53', '#4ce753', '#4fe454', '#52e154', '#55de54', '#58db55', '#5bd855', '#5ed556', '#61d256', '#64cf56', '#67cc57', '#6ac957', '#6dc658', '#70c358', '#73c059', '#76bd59', '#79ba5a', '#7cb75a', '#7fb45b', '#82b15b', '#85ae5c', '#88ab5c', '#8ba85d', '#8ea55d', '#91a25e', '#949f5e', '#979c5f', '#9a995f', '#9d9750', '#a09450', '#a39151', '#a68e51', '#a98b52', '#ac8852', '#af8653', '#b28353', '#b68054',
-            ]}
-
+            <GaugeModels val1={Vavg} title={'Avg Voltage'} unit={'${value} V'} max={1000} numLabels={3}
+              sectionColors={[
+                // A gradient from red to green to red
+                '#a09450', '#9d9750', '#9a995f', '#979c5f', '#949f5e', '#91a25e', '#8ea55d', '#8ba85d', '#88ab5c', '#85ae5c', '#82b15b', '#7fb45b', '#7cb75a', '#79ba5a', '#76bd59', '#73c059', '#70c358', '#6dc658', '#6ac957', '#67cc57', '#64cf56', '#61d256', '#5ed556', '#5bd855', '#58db55', '#55de54', '#52e154', '#4fe454', '#4ce753', '#49ea53', '#46ed52', '#43f052', '#40f351', '#3df651', '#3af950', '#37fc50', '#34ff4f', '#34ff4f', '#37fc50', '#3af950', '#3df651', '#40f351', '#43f052', '#46ed52', '#49ea53', '#4ce753', '#4fe454', '#52e154', '#55de54', '#58db55', '#5bd855', '#5ed556', '#61d256', '#64cf56', '#67cc57', '#6ac957', '#6dc658', '#70c358', '#73c059', '#76bd59', '#79ba5a', '#7cb75a', '#7fb45b', '#82b15b', '#85ae5c', '#88ab5c', '#8ba85d', '#8ea55d', '#91a25e', '#949f5e', '#979c5f', '#9a995f', '#9d9750', '#a09450', '#a39151', '#a68e51', '#a98b52', '#ac8852', '#af8653', '#b28353', '#b68054',
+              ]}
             />
-            <GaugeModels val1={Math.abs(RealPower) * 10} title={'Real Power'} unit={'${value} W'} max={1000} numLabels={3} />
-            <LineChart valueA={currValues} timeA={currLabels} xAxisLabel={"Time"} yAxisLabel={"Current ( A )"} minY={10} maxY={50} label={'(Ia + Ib + Ic) ÷ 3 '} title={'Current'} fill={true} />
+            <GaugeModels val1={Math.abs(RealPower) * 10} title={'Real Power'} unit={'${value} W'} max={1000} numLabels={3}
+              sectionColors={[
+                // A gradient from red to green to red
+                '#a09450', '#9d9750', '#9a995f', '#979c5f', '#949f5e', '#91a25e', '#8ea55d', '#8ba85d', '#88ab5c', '#85ae5c', '#82b15b', '#7fb45b', '#7cb75a', '#79ba5a', '#76bd59', '#73c059', '#70c358', '#6dc658', '#6ac957', '#67cc57', '#64cf56', '#61d256', '#5ed556', '#5bd855', '#58db55', '#55de54', '#52e154', '#4fe454', '#4ce753', '#49ea53', '#46ed52', '#43f052', '#40f351', '#3df651', '#3af950', '#37fc50', '#34ff4f', '#34ff4f', '#37fc50', '#3af950', '#3df651', '#40f351', '#43f052', '#46ed52', '#49ea53', '#4ce753', '#4fe454', '#52e154', '#55de54', '#58db55', '#5bd855', '#5ed556', '#61d256', '#64cf56', '#67cc57', '#6ac957', '#6dc658', '#70c358', '#73c059', '#76bd59', '#79ba5a', '#7cb75a', '#7fb45b', '#82b15b', '#85ae5c', '#88ab5c', '#8ba85d', '#8ea55d', '#91a25e', '#949f5e', '#979c5f', '#9a995f', '#9d9750', '#a09450', '#a39151', '#a68e51', '#a98b52', '#ac8852', '#af8653', '#b28353', '#b68054',
+              ]}
+            />
+            <LineChart valueA={currValues} timeA={currLabels} xAxisLabel={"Time"} yAxisLabel={"Current ( A )"} minY={10} maxY={50} label={'(Ia + Ib + Ic) ÷ 3 '} title={'Current'} fill={true} fillColor='lightblue' pointColor='blue' />
 
           </div>
         </div>
