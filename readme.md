@@ -24,3 +24,13 @@ This project is a utility to monitor battery system status and critical metrics,
 * When finshed, run `npm start` to launch the dashboard interface
 
 *The interface should automatically open in the default browser when ready. If this window is closed or does not open, navigate to [localhost:8081](http://localhost:8081) in any browser.*
+
+### 3. Using the dashboard
+
+The dashboard currently has three main pages:
+
+* The **demo** section, which displays a range of widget types and system metrics using data pulled from the SQL database
+
+* The **data** section, which displays a list of currently accessible datapoints for debugging purposes
+
+* The **layout** section, which enables custom widget layouts and sizing
