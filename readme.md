@@ -3,6 +3,10 @@
 
 This project is a utility to monitor battery system status and critical metrics, built with ExpressJS, SQL, and React. 
 
+## Requirements
+* [Node.JS](https://nodejs.org/en/download/) 
+* [MySQL](https://dev.mysql.com/downloads/installer/)
+
 ## Getting Started
 *This guide assumes a running local database has been configured in
 `db.config.js`, and its schema matched in `datasample.model.js`.*
@@ -23,7 +27,7 @@ This project is a utility to monitor battery system status and critical metrics,
 
 * When finshed, run `npm start` to launch the dashboard interface
 
-*The interface should automatically open in the default browser when ready. If this window is closed or does not open, navigate to [localhost:8081](http://localhost:8081) in any browser.*
+*The interface should automatically open in the default browser when ready. If this window is accidentally closed or does not open, navigate to [localhost:8081](http://localhost:8081) in any browser.*
 
 ### 3. Using the dashboard
 
