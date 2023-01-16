@@ -158,12 +158,11 @@ function App() {
             {/* Freq: divide by 1000 */}
             {/* Pf -0.8 0 0.8 */}
             <GaugeModels val1={FanSpeed} unit={'${value} RPM'} min={0} max={6000} numLabels={2} title={'Fan Speed'} useGradient={true} gradientStartColor={"rgb(230,230,230)"} gradientEndColor={"lightblue"} />
-            <GaugeModels val1={OnboardTemp / 10} unit={'${value} °C'} min={0} max={100} numLabels={4} sectionColors={[
+            <GaugeModels val1={OnboardTemp / 10} unit={'${value} °C'} min={0} max={100} numLabels={4} customSegmentStops={[0, 70, 90, 100]} sectionColors={[
               "#86ff70",
-              "#86ff70",
-              "#86ff70",
-              "#86ff70",
-              "#86ff70",
+              //Yellow
+              "#ffff00",
+
               "#FF3131"
             ]} title={'Temperature'} />
             <div style={{

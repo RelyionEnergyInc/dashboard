@@ -1,8 +1,7 @@
-import Draggable, { DraggableCore } from 'react-draggable';
 import GridLayout from "react-grid-layout";
 
 import { Button } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { GaugeModels, DoughnutModels } from './components/gaugeModels';
 import ListLiveDataSamples from './components/listLiveDataSamples';
@@ -272,7 +271,7 @@ export class Dashboard extends React.PureComponent {
 
     // Run this.onAddItem for each item in originalLayouts on page load
     componentDidMount() {
-        
+
         // if (originalLayouts.length > 0) {
         //     originalLayouts.map((item) => {
         //         this.onAddItem('Doughnut');

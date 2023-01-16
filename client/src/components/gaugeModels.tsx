@@ -25,6 +25,7 @@ interface GaugeProps {
   gaugeWidth?: number;
   gaugeHeight?: number;
   needleHeightRatio?: number;
+  customSegmentStops?: number[];
 }
 
 interface MeterProps {
@@ -115,6 +116,8 @@ export function GaugeModels(props: GaugeProps) {
           height={props.gaugeHeight || 180}
           maxSegmentLabels={props.numLabels || 5}
           needleHeightRatio={props.needleHeightRatio || 0.9}
+          // fluidWidth={true}
+          customSegmentStops={props.customSegmentStops}
           segmentColors={
             props.sectionColors ||
             ['#E5E4E2']}
