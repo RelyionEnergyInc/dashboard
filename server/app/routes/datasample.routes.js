@@ -7,11 +7,12 @@ module.exports = app => {
   // Retrieve all Data Samples
   router.get("/", datasamples.findAll);
 
-  router.get("/:id", datasamples.findOne);
+  router.get("/:id?", datasamples.findOne);
 
-  router.get("/max", datasamples.findMax);
+  router.get("find/max", datasamples.findMax);
 
-  // app.get('*', datasamples);
+  router.get("/streaming", datasamples.stream);
+
 
   app.use('/api/datasamples', router);
-};
+}

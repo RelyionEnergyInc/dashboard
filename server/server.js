@@ -18,7 +18,7 @@ db.sequelize.sync();
 
 
 app.get("/", function(req, res) {
-	res.json({message: "Welcome, this is a test."});
+	res.json({message: "Welcome, the Relyion backend is now running."});
 });
 
 
